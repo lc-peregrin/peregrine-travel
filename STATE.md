@@ -39,8 +39,12 @@ sequencing decision).
 polished and "clean looking."** Don't start on `docs/BD_PIPELINE.md` open decisions until this
 readiness list is closed out. Site-readiness checklist, in rough priority order:
 
-1. **Real logo/brand asset** — biggest visible gap. Currently only a hand-coded inline SVG wing
-   mark exists; no exported logo file, no favicon. Worth a Claude Design session.
+1. ~~**Real logo/brand asset**~~ — **done 2026-07-23.** Full asset set built and wired in:
+   favicon (with a separate simplified mark for 16px legibility), apple-touch-icon, OG/social
+   preview image, transparent + solid mark variants, wordmark lockup. All in `/design-exports` and
+   `site/public/`, verified live via local server (200s, correct tags in rendered HTML). See
+   `docs/BRAND.md` for details, including a real rendering bug that was caught and fixed
+   (open-path strokes need explicit `fill="none"` or some renderers fill them black).
 2. **Visual QA on tonight's changes** — the Stripe "Pay with card" button and the hold-button
    double-submit fix were built/tested functionally but not re-screenshotted across the full flow
    and all 4 languages the way the original redesign was. Worth a fresh pass before calling the

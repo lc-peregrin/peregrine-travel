@@ -36,17 +36,35 @@ design file — this **is** the source of truth:
 System font stack, no custom webfont licensed or loaded:
 `-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif`
 
-## Logo — real gap
+## Logo — closed 2026-07-23
 
-**No standalone logo asset file exists anywhere** (not in this repo, not in Drive, not in
-uploads). What exists instead: an inline SVG "wing mark" (three curved strokes, accent blue +
-gold) hand-coded directly into `site/public/index.html`, used as the header icon. It was designed
-to riff on a mock logo image Liam shared once in chat as inspiration — that image was never saved
-as a retrievable file, so it can't be reproduced or refined outside that one conversation.
+Real exported assets now exist in `/design-exports` and `site/public/`, built from the wing-mark
+motif already live and approved on the site (not redesigned from scratch, to avoid drifting from
+what Liam already signed off on):
 
-**Open gap:** no exported PNG/SVG logo file, no favicon set, no wordmark treatment beyond the
-plain "PEREGRIN" text in the header. If Claude Design gets used, this is the first thing worth
-producing — export finished assets into `/design-exports`.
+- `peregrin-mark.svg` / `peregrin-mark-512.png` — square icon mark, dark background, for app-icon
+  contexts.
+- `peregrin-mark-transparent.svg` / `-512.png` — same mark, transparent background, for placement
+  on colored surfaces.
+- `peregrin-lockup.svg` / `.png` — icon + "PEREGRIN" wordmark, horizontal lockup.
+- `peregrin-og-image.svg` / `.png` — 1200×630 social share preview.
+- `site/public/favicon.ico`, `favicon-32.png`, `favicon-16.png`, `apple-touch-icon.png` — wired
+  into `site/public/index.html`'s `<head>`, verified live (served 200, correct tags present in
+  rendered HTML).
+
+One real design decision made along the way: the full 3-stroke mark doesn't read at 16×16 (blurs
+into an indistinct blob) — a simplified 2-stroke version was built specifically for the smallest
+favicon sizes, while 32px+ and all other uses keep the full 3-stroke mark. Also fixed a rendering
+bug where the open-path strokes needed explicit `fill="none"` — without it, some renderers
+(confirmed with ImageMagick; browsers tolerate it silently) fill the implied closed shape black,
+producing dark slivers between the strokes.
+
+Still true: this was built directly rather than through Claude Design, so if a from-scratch
+brand refresh is ever wanted, that's still the right tool for it — but the "no logo asset exists"
+gap itself is closed.
+
+Not yet done: a real wordmark font choice (currently system font, bold), and app icon variants for
+any future native app.
 
 ## Name & domain
 
