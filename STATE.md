@@ -1,6 +1,7 @@
 # Peregrin Travel — state
 
-Last updated: 2026-07-23, end of tonight's Cowork session (project consolidation).
+Last updated: 2026-07-23, end of tonight's Cowork session (project consolidation + site-readiness
+sequencing decision).
 
 ## Done
 
@@ -28,22 +29,36 @@ Last updated: 2026-07-23, end of tonight's Cowork session (project consolidation
 
 ## In progress
 
-- Step 5 of tonight's setup (git init for this outer folder, GitHub repo, Vercel connection for
-  `/site`) — see "Open decisions" below, this needs a call before proceeding.
-- Automation roadmap (Step 6) — not yet drafted, next up.
+- Nothing actively in progress — tonight's consolidation is fully wrapped. `peregrine-travel` repo
+  is live on GitHub (`lc-peregrin/peregrine-travel`), pushed, `liamconroy96-cell` has accepted
+  collaborator access.
 
-## Next
+## Next — sequencing decision made 2026-07-23
 
-1. Finish git/GitHub setup for the outer `peregrine-travel` folder (docs/automation, not `/site`
-   itself — see open decision #1).
-2. Propose automation roadmap for approval (content drafting, BD prospecting, competitor
-   monitoring, social drafts, email triage, invoicing) — don't build until approved.
-3. Decide what happens to the two BD pipelines (see `docs/BD_PIPELINE.md`) — Pipeline A (old
-   supply-outreach, 33 agencies) is largely obsolete under the current strategy; Pipeline B
-   (14 B2B/affiliate targets) is the live strategy but has zero outreach copy written yet.
-4. Real logo asset doesn't exist — worth a Claude Design session once that tool is picked up.
-5. Task #43 equivalent (email delivery) is code-complete and was pushed tonight — worth a live
-   re-test now that the domain fix is deployed.
+**Liam's explicit call: hold BD outreach (both pipelines) until the site itself is properly
+polished and "clean looking."** Don't start on `docs/BD_PIPELINE.md` open decisions until this
+readiness list is closed out. Site-readiness checklist, in rough priority order:
+
+1. **Real logo/brand asset** — biggest visible gap. Currently only a hand-coded inline SVG wing
+   mark exists; no exported logo file, no favicon. Worth a Claude Design session.
+2. **Visual QA on tonight's changes** — the Stripe "Pay with card" button and the hold-button
+   double-submit fix were built/tested functionally but not re-screenshotted across the full flow
+   and all 4 languages the way the original redesign was. Worth a fresh pass before calling the
+   site "clean."
+3. **Live re-test of email delivery** — code fix (verified `send.peregrin.travel` domain) was
+   pushed tonight but not re-confirmed live end-to-end since.
+4. **Favicon / link preview polish** — no favicon, no Open Graph image confirmed, both visible the
+   moment someone shares or bookmarks the link.
+5. Not blocking "clean looking" but worth knowing: Duffel is still test-mode (go-live pending) and
+   Stripe is still test/sandbox-mode (business verification not started) — these affect whether
+   the site can take real money/issue real tickets, not how it looks, so lower priority for this
+   specific readiness push but will matter before real BD outreach converts into paying partners.
+
+Once this list is closed, return to `docs/BD_PIPELINE.md`'s open decisions (Pipeline A fate,
+Pipeline B outreach copy).
+
+Automation roadmap (`automation/ROADMAP_PROPOSAL.md`) is written and ranked, waiting on Liam's
+go-ahead — independent of the BD-hold decision, could be picked up in parallel if useful.
 
 ## Blockers
 
@@ -65,7 +80,8 @@ Last updated: 2026-07-23, end of tonight's Cowork session (project consolidation
    wrong.
 2. **BD Pipeline A fate** — re-approach the 12 cleanly-contacted agencies with a reframed
    (reseller, not supplier) pitch, or let it lapse and start Pipeline B fresh? See
-   `docs/BD_PIPELINE.md`.
+   `docs/BD_PIPELINE.md`. **Deferred** — Liam wants the site-readiness checklist above closed out
+   before touching either BD pipeline.
 3. **Google Drive / email identity** — confirmed business content is correctly under
    `lc@peregrin.travel`; worth deciding if Liam wants his default browser profile / Drive account
    on this Mac switched to that identity permanently, or just used situationally.
