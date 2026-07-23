@@ -1,0 +1,6 @@
+# /site is its own independent git repo with its own GitHub remote and Vercel deployment.
+# Deliberately excluded here so the outer repo never touches its history or config.
+site/
+
+.DS_Store
+node_modules/

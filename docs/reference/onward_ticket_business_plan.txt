@@ -1,0 +1,305 @@
+Onward Ticket Service — Business Plan
+
+Prepared July 2026 · All competitor figures are third-party estimates
+and should be validated with SimilarWeb/Ahrefs before committing capital
+
+------------------------------------------------------------------------
+
+1. The Business in One Paragraph
+
+Sell verifiable flight reservations (real airline PNRs, never ticketed)
+for USD $14–20 to travellers who need proof of onward travel for airline
+check-in, immigration, or visa applications. Marginal cost per unit is
+near zero (a GDS booking hold), fulfilment is fully automatable, and
+demand is structural — it exists as long as visa-exempt entry rules
+require onward proof. The business is a margin machine constrained not
+by demand or technology but by supply access (GDS/host agency
+relationships) and distribution (SEO trust).
+
+------------------------------------------------------------------------
+
+2. Market Size & Competitor Revenue Estimates
+
+Observable traffic (SimilarWeb, most recent available data)
+
+  -----------------------------------------------------------------------------------
+  Site                                Est. monthly visits     Positioning
+  ----------------------------------- ----------------------- -----------------------
+  onwardticket.com                    ~170K                   Market leader; from
+                                                              $16; strong Trustpilot
+                                                              presence
+
+  bestonwardticket.com                ~55K                    Actual ticketed
+                                                              bookings
+                                                              (buy-and-cancel model),
+                                                              higher trust claim
+
+  schengenflightreservationvisa.com   ~49K                    Visa-application niche
+                                                              (Schengen), itinerary +
+                                                              hotel bundles
+
+  bookonwardticket.com                ~27K                    Budget challenger
+
+  flightitineraryforvisa.com          ~17K                    Visa itinerary niche
+
+  dummyticket.com and long tail       est. 50–150K combined   Fragmented tail, many
+                                                              geographies
+  -----------------------------------------------------------------------------------
+
+Visible direct market: roughly 370–470K visits/month across identifiable
+players, heavily skewed to the leader.
+
+Revenue back-of-envelope
+
+Traffic here is extremely high-intent — people arrive from searches like
+“onward ticket,” “dummy ticket for visa,” or Reddit referrals with
+wallet already open. Reasonable conversion assumptions are 4–10% (vs
+1–3% for generic e-commerce).
+
+onwardticket.com: - Conservative: 170K × 4% × $17 AOV ≈ $115K/month
+(~$1.4M/yr) - Mid: 170K × 7% × $18 AOV (incl. upsells) ≈ $215K/month
+(~$2.6M/yr) - Aggressive: 170K × 10% × $20 ≈ $340K/month (~$4M/yr)
+
+Given near-zero COGS, operating margin plausibly 60–80% after payment
+fees, agency costs, support staff, and marketing. The leader is likely a
+$1.5–4M revenue, $1–3M profit business run by a handful of people.
+
+Tier-2 players (50K visits): ~$35–90K/month revenue. Even the 27K-visit
+challenger likely clears $20–50K/month.
+
+Total addressable direct market: roughly $6–12M/yr today, growing with
+visa-run tourism, digital nomadism, and increasingly automated airline
+document checks. The larger adjacent market is bundled
+proof-of-onward-travel inside visa agencies, eSIM apps, and travel
+insurance products.
+
+Unit economics (unticketed hold model)
+
+  Line item                               Per order
+  --------------------------------------- ------------------------
+  Revenue (base product)                  $15.00
+  GDS/agency segment cost                 $0.50–2.00
+  Payment processing (high-risk, ~4–6%)   $0.60–0.90
+  Support allocation                      $0.30–0.80
+  Refunds/chargebacks (~2–4%)             $0.30–0.60
+  Contribution margin                     ~$10.50–13.00 (70–85%)
+
+Upsells lift AOV materially: extended validity 48h/7d/14d (+$5–20),
+hotel reservation (+$10), rush/instant delivery (+$5), flight + hotel
+visa bundles (+$25–35).
+
+------------------------------------------------------------------------
+
+3. What It Would Take to Build
+
+Critical path: booking supply (the real barrier)
+
+Options, in ascending order of robustness:
+
+1.  Partner with a host agency / consolidator. You operate as a
+    sub-agent; they hold IATA accreditation and GDS contracts
+    (Amadeus/Sabre/Travelport). Fastest route (weeks). Risk: they will
+    cut you off once churn volume triggers airline ADM fines.
+    Mitigation: be honest upfront, negotiate a per-segment fee that
+    compensates their risk, spread volume across 2–3 agencies.
+2.  Non-IATA agency with GDS access via a ticketing consolidator. Common
+    in Asia (Thailand, India, Philippines). More control, moderate setup
+    (1–3 months).
+3.  Own IATA/TIDS accreditation + direct GDS contracts. 6–12 months,
+    capital requirements, and airlines will still ADM you for churning.
+    This is where incumbents likely sit, with sophisticated
+    hold-rotation logic (booking across many airlines, keeping churn per
+    airline below enforcement thresholds).
+4.  Buy-and-cancel fallback. Use fares with free 24h cancellation (US
+    DOT rule) or void windows. Higher working capital, real cash
+    cycling, but bulletproof verifiability. bestonwardticket’s model.
+    Good as a premium tier.
+
+A durable operation probably runs 1 + 4 hybrid: cheap holds for the
+standard product, buy-and-cancel for a “guaranteed ticketed” premium
+tier.
+
+Technology (trivial — 4–8 weeks)
+
+-   Next.js storefront (checkout form: name, route preference or
+    auto-assign, date, validity)
+-   Booking automation: agency API or GDS API (Amadeus Self-Service APIs
+    exist; hold capability depends on contract) or, crudely, a
+    human-in-the-loop agent dashboard at low volume
+-   PDF itinerary generation with live PNR the customer can verify on
+    the airline site
+-   Auto-expiry/rebooking engine for extended-validity products
+-   Email delivery, order status, refund flow
+
+Payments
+
+High-risk classification is likely. Plan A: Stripe with careful merchant
+categorisation and low dispute rate. Plan B: high-risk processors
+(e.g. travel-specialised PSPs), plus crypto as a secondary rail (nomad
+audience accepts it). Keep chargebacks under 1% via instant delivery +
+responsive support.
+
+Distribution (the moat you must build)
+
+-   SEO: “onward ticket,” “dummy ticket,” “flight itinerary for visa,”
+    plus country-specific long-tail (“proof of onward travel Thailand,”
+    “Schengen visa flight reservation”). Incumbents own the head terms;
+    entry is via long-tail country/visa pages (200+ programmatic pages)
+    and non-English markets (Spanish, Portuguese, Hindi, Bahasa —
+    SimilarWeb shows incumbents already ranking on “vuelos
+    baratos”-adjacent terms, i.e. LATAM demand is real and underserved).
+-   Reddit/forum reputation: r/digitalnomad, r/travel, r/Thailand,
+    VisaJourney, nomad Facebook groups. Slow, authentic, decisive — this
+    is where purchase decisions actually happen.
+-   Affiliate/creator program: travel YouTubers and visa-run bloggers,
+    20–30% commission. Incumbents underuse this.
+-   B2B embed: white-label API for visa agencies, eSIM apps, travel
+    insurers. One integration can equal thousands of retail orders and
+    is far more defensible.
+
+Team & capital
+
+  -----------------------------------------------------------------------
+  Item                                Cost
+  ----------------------------------- -----------------------------------
+  Site + automation build (solo dev   $5–15K or sweat equity
+  or contracted)                      
+
+  Agency deposits/bonds, entity       $5–15K
+  setup, legal review                 
+
+  Working capital (buy-and-cancel     $5–10K
+  float + refunds)                    
+
+  SEO content + initial marketing (6  $10–20K
+  months)                             
+
+  Support VA (Philippines/Thailand,   $500–1,200/mo
+  part-time → full-time)              
+
+  Total to credible launch            ~$25–60K + 6–9 months
+  -----------------------------------------------------------------------
+
+Milestones
+
+-   Months 0–2: agency partnership signed, MVP live, manual fulfilment,
+    first 100 orders via Reddit/nomad communities
+-   Months 3–6: automation complete, programmatic SEO pages indexed,
+    500–1,500 orders/mo (~$10–30K/mo revenue)
+-   Months 6–12: second agency redundancy, premium ticketed tier, first
+    B2B white-label deal, 2–4K orders/mo (~$40–80K/mo)
+-   Break-even: plausibly month 4–8 at these economics
+
+------------------------------------------------------------------------
+
+4. Risks (ranked)
+
+1.  Supply cutoff. Airlines fine agencies for churn (ADMs); your host
+    agency drops you. Mitigation: multi-agency redundancy, hold-rotation
+    logic, buy-and-cancel fallback tier.
+2.  Regulatory/policy shift. Airlines or IATA tighten hold rules (some
+    airlines already require instant ticketing on certain fares); a
+    country starts verifying ticketed status. Mitigation: premium
+    ticketed tier already built.
+3.  Payment processor termination. Mitigation: two PSPs from day one +
+    crypto rail; keep disputes <1%.
+4.  Legal/reputational grey zone. The reservation is real, but customers
+    use it to satisfy immigration requirements they don’t intend to
+    honour. Not clearly illegal anywhere major, but get a legal opinion
+    in your operating jurisdiction, keep ToS explicit (“verifiable
+    reservation, not travel”), and incorporate somewhere pragmatic (SG,
+    HK, Estonia e-residency, or AU with advice).
+5.  SEO dependence + Google/AI-search volatility. AI answers
+    increasingly intercept “do I need an onward ticket” queries.
+    Mitigation: brand searches, affiliates, B2B embed, email list.
+6.  Incumbent moat. onwardticket.com has years of Trustpilot reviews and
+    Reddit citations. Head-on competition on “onward ticket” is a losing
+    fight for 2+ years.
+
+------------------------------------------------------------------------
+
+5. Strategic Verdict
+
+Don’t clone the leader; flank it. Three viable wedges:
+
+1.  Geographic/language wedge: Spanish/Portuguese/Bahasa/Hindi-first
+    product for LATAM and Asian outbound travellers — demonstrably
+    underserved, incumbents’ non-English SEO is thin.
+2.  Premium trust wedge: “actually ticketed, guaranteed verifiable for
+    48h, refund if it fails at check-in” at $29–39. Converts the
+    paranoid segment incumbents leave anxious.
+3.  B2B/API wedge: white-label onward-ticket API for visa agencies, eSIM
+    and nomad-insurance apps. Higher defensibility, no SEO war,
+    recurring volume.
+
+The retail business is real (~$1.5–4M/yr for the leader, healthy five
+figures monthly for tier-2 players) and technically easy. The genuine
+difficulty is boring: agency relationships, payment rails, and two years
+of trust-building. Anyone entering should budget for the moat-building,
+not the code.
+
+------------------------------------------------------------------------
+
+6. Recommendations
+
+Overall call: pursue as a lean side bet, not a primary venture — and enter through the B2B door
+
+The economics are genuinely attractive, but the retail path is a
+two-year SEO trust war against entrenched incumbents with near-identical
+products. That’s a grind with a binary payoff. The B2B/API wedge inverts
+this: it plays to sales and relationship skills rather than content
+marketing, it’s defensible, and five signed integration partners could
+match the order volume of a year of organic SEO. Specific
+recommendations, in priority order:
+
+1. Validate supply before anything else (weeks 1–4, cost: ~$0). The
+entire business hinges on GDS hold access. Before building anything,
+have direct conversations with 3–5 travel consolidators/host agencies —
+Thailand and the Philippines are strong hunting grounds for non-IATA
+sub-agency arrangements, and being on the ground in SE Asia is a genuine
+advantage here. The question to answer: will they knowingly support
+hold-churn volume at an agreed per-segment fee, and at what threshold do
+they get nervous? If nobody credible says yes, the venture dies cheaply.
+If two say yes, there’s redundancy from day one.
+
+2. Lead with the white-label API pitch, not a consumer site (months
+1–3). Draft a one-page offer — “add verifiable proof-of-onward-travel to
+your product, revenue share, one API call” — and pitch it to visa
+agencies, eSIM apps, nomad insurance products, and visa-run tour
+operators in Thailand/Vietnam/Indonesia. Even two LOIs before building
+justifies the investment and effectively pre-sells the volume. This is a
+cold-outreach and partnership sales problem, not a content-marketing
+problem — a better fit for a BD skillset.
+
+3. Build the thinnest possible MVP (months 2–3, <$5K). A checkout page,
+manual fulfilment through the agency partner, PDF with live PNR, and
+instant email delivery. Automate only after 200+ orders prove the
+funnel. Next.js/Vercel is entirely sufficient. Don’t build the
+auto-rebooking engine, multi-language site, or dashboards until revenue
+demands it.
+
+4. If pursuing retail at all, go non-English first. Spanish and Bahasa
+Indonesia long-tail visa pages face a fraction of the competition of
+English “onward ticket” terms. Treat English head terms as a 2+ year
+project or skip them entirely.
+
+5. Structure for the grey zone from day one. Incorporate deliberately
+(Singapore or Estonia e-residency are pragmatic options; get proper tax
+advice for the relevant residency), write ToS stating plainly that the
+product is a verifiable reservation and not transportation, obtain a
+short legal opinion in the operating jurisdiction, and run two payment
+processors plus a crypto rail before scaling any ad spend. Businesses in
+this niche die from processor termination and supply cutoff, not from
+lack of customers.
+
+6. Set a kill/scale threshold. Cap initial exposure at ~$15–20K and 6
+months. Scale trigger: 1,000+ cumulative orders or one signed B2B
+integration. Kill trigger: no agency willing to renew supply terms, or
+sub-2% conversion on qualified traffic after 3 months of iteration. This
+keeps it a cheap hypothesis test that can sit alongside employment and
+other projects rather than becoming a sunk-cost trap.
+
+What not to do: don’t clone the leader’s site and bid on “onward ticket”
+keywords — $2.50–3+ CPCs against an incumbent with superior conversion
+trust is negative-EV; don’t self-fund IATA accreditation before proving
+demand; don’t launch without processor redundancy.

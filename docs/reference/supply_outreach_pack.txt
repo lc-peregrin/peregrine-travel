@@ -1,0 +1,290 @@
+Supply Outreach Pack — Consolidator & Host Agency Targets + Pitch Sequence
+
+Working document, July 2026. Verify contacts and current status before
+sending — consolidator businesses change hands and API terms shift.
+Names marked ⚠ have ToS or structural caveats explained inline.
+
+------------------------------------------------------------------------
+
+Part 1: Target List
+
+How to read this list
+
+You need one of three things from a partner: (a) GDS booking credentials
+as a sub-agent, (b) a ticketing/hold arrangement where they create PNRs
+on your behalf, or (c) API access that supports unticketed holds. Tier 1
+is where the deal most likely gets done; Tiers 2–3 are for redundancy
+and education.
+
+Tier 1 — Regional consolidators & sub-agency arrangements (highest probability of “yes”)
+
+These businesses live on volume from sub-agents and are commercially
+pragmatic. The non-IATA sub-agent model (you book on their credentials,
+pay per segment) is standard practice across South/Southeast Asia.
+
+  -----------------------------------------------------------------------------
+  Target            Base              Why them               Approach
+  ----------------- ----------------- ---------------------- ------------------
+  Mystifly          Singapore         Major global airfare   Partnerships/API
+                                      consolidator with API  sales team via
+                                      (MystiFares/OneAPI);   website; frame as
+                                      works with startups    high-volume niche
+                                      and OTAs;              OTA
+                                      hold-then-ticket       
+                                      workflows are native   
+                                      to their model         
+
+  TBO.com (TBO Tek) India (global)    One of the largest B2B Sub-agent
+                                      travel platforms;      registration, then
+                                      thousands of           commercial
+                                      sub-agents; PNR        conversation about
+                                      hold-and-queue         volume
+                                      workflows standard     
+
+  Akbar Travels /   India/UAE         Massive consolidator   B2B portal signup
+  Akbar Online                        with sub-agent portal; → account manager
+  (B2B)                               commercially           
+                                      aggressive             
+
+  Riya Travel (Riya India (global)    Long-established       Same as above
+  Connect)                            consolidator with B2B  
+                                      sub-agent network      
+
+  Thai              Bangkok           Thai Travel Agents     In-person meetings
+  consolidators via                   Association member     in Bangkok; warm
+  TTAA directory                      directory lists IATA   intros beat cold
+                                      agencies doing         email in Thailand
+                                      sub-agency ticketing;  
+                                      your on-the-ground     
+                                      presence and Thai      
+                                      network is the edge    
+                                      here                   
+
+  Philippine        Manila            Same dynamic;          Directory scrape →
+  agencies via PTAA                   Philippine IATA        email/call
+  directory                           agencies actively sell 
+                                      GDS access to          
+                                      sub-agents             
+
+  Indonesian        Jakarta           Same model; also       Directory scrape
+  consolidators                       positions you for the  
+  (via ASTINDO                        Bahasa retail wedge    
+  directory)                                                 
+  -----------------------------------------------------------------------------
+
+Tier 2 — Australian host agency networks & air consolidators (home-turf, higher compliance culture)
+
+More conservative and ADM-sensitive than Asian consolidators, but worth
+3–4 conversations for redundancy and because a domestic partner
+simplifies banking/entity questions.
+
+  -----------------------------------------------------------------------
+  Target                  Why them                Caveat
+  ----------------------- ----------------------- -----------------------
+  Express Travel Group    Major Australian air    Will ask hard questions
+  (ETG)                   consolidator serving    about churn; be ready
+                          independent agents      with the honesty pitch
+
+  Consolidated Travel     Long-standing           Same
+                          Australian ticket       
+                          consolidator            
+
+  Air Tickets             Large consolidation arm Same
+  (Helloworld)            of Helloworld           
+
+  TravelManagers / MTA    Host membership gets    ⚠ Membership implies
+  (host agency networks)  you GDS credentials     you’re a practising
+                          under their             agent; churn on their
+                          accreditation           PCC will surface fast.
+                                                  Use only if a straight
+                                                  commercial per-segment
+                                                  deal is offered
+  -----------------------------------------------------------------------
+
+Tier 3 — API-first providers (fastest tech, weakest fit — know the caveats)
+
+  -----------------------------------------------------------------------
+  Target                  What they offer         Caveat
+  ----------------------- ----------------------- -----------------------
+  Duffel ⚠                Modern flight API,      ToS almost certainly
+                          supports “hold orders”  prohibits systematic
+                          on some airlines,       no-ticket churn; expect
+                          instant integration     account termination at
+                                                  scale. Useful for the
+                                                  ticketed premium tier
+                                                  (book + cancel within
+                                                  void windows)
+
+  Amadeus Self-Service    Flight Create Orders    Production ticketing
+  APIs ⚠                  API; low barrier to     requires a consolidator
+                          start                   relationship anyway;
+                                                  hold churn on your own
+                                                  key is visible and
+                                                  enforceable. Best used
+                                                  as the tech layer on
+                                                  top of a Tier 1
+                                                  commercial deal
+
+  Kiwi.com Tequila ⚠      B2B booking API         Ticketed model, not
+                                                  holds — relevant only
+                                                  to buy-and-cancel tier
+
+  Travelfusion            LCC aggregator          LCCs mostly require
+                                                  instant payment — low
+                                                  fit, but LCC content
+                                                  matters in SE Asia
+                                                  where
+                                                  airline-verifiability
+                                                  expectations differ
+  -----------------------------------------------------------------------
+
+Tier 4 — The quiet route (potentially the real answer)
+
+Find the agency that already supplies an existing onward-ticket service.
+Several mid-size Asian consolidators quietly run this volume today. Two
+ways in: (1) ask Tier 1 targets directly — “do you already serve clients
+in the proof-of-onward-travel space?”; (2) look at the issuing office /
+booking origin details on competitor sample PNRs (their FAQ screenshots
+and Trustpilot reviews sometimes reveal airline and region patterns). An
+agency already absorbing this risk for one client will price a second
+client efficiently.
+
+------------------------------------------------------------------------
+
+Part 2: Qualification Questions (ask on the first call)
+
+1.  Can you create GDS reservations that hold unticketed for 24–72h, and
+    on which airlines/booking classes?
+2.  What do you charge per segment for bookings that never ticket? (If
+    they say “nothing, holds are free” — they haven’t thought about it;
+    walk them to a per-segment fee so the relationship survives contact
+    with reality.)
+3.  What’s your churn tolerance before ADMs/GDS unproductive-segment
+    fees become your problem — and can we structure the fee so I’m
+    pre-paying that risk?
+4.  Can holds be created via API/robotics on your credentials, or manual
+    queue only?
+5.  Have you had ADM issues before? Which airlines enforce hardest in
+    your market?
+6.  Can you also ticket-and-void (24h US DOT window / void windows in
+    BSP) for a premium product?
+7.  What monthly volume makes this worth your time — and what volume
+    makes you nervous?
+
+Deal shape to aim for: USD $0.75–2.00 per segment created, prepaid in
+blocks, no exclusivity, 30-day exit both ways, and an explicit written
+understanding of what the bookings are for. Two signed partners before
+launch, not one.
+
+------------------------------------------------------------------------
+
+Part 3: Supply Pitch Email
+
+Version A — Direct/honest (default; use for Tier 1 Asia)
+
+Subject: Commercial proposal — recurring GDS segment volume, unusual use
+case
+
+Hi [Name],
+
+I’m an Australian business developer building a proof-of-onward-travel
+service — the product travellers buy when an airline or immigration
+officer requires evidence of an onward flight (similar to
+onwardticket.com, which does this at significant scale today).
+
+I’m writing to you openly about what this involves, because the
+partnership only works if it’s built on that: I need the ability to
+create genuine GDS reservations at volume, most of which will
+intentionally never be ticketed and will lapse at the hold deadline. I
+understand this is churn, that churn has a cost to you (ADM exposure,
+GDS unproductive segment fees), and I want to pay for it properly rather
+than pretend it isn’t there.
+
+What I’m proposing: - A per-segment fee for every reservation created,
+prepaid in blocks — you price your risk in - Volume starting at
+~[300–500] segments/month, scaling with my sales - Booking distribution
+spread across carriers/classes to your guidance, keeping per-airline
+churn below enforcement attention - No exclusivity, 30-day exit for both
+sides
+
+If you already serve a client in this space, even better — you know the
+economics work. Could we set up a 20-minute call this week or next?
+
+Regards, Liam Conroy [phone / LinkedIn]
+
+Version B — Softer opener (use for Tier 2 Australia, where compliance culture is stiffer)
+
+Subject: Sub-agency enquiry — niche travel documentation product
+
+Hi [Name],
+
+I’m launching a travel documentation service for the visa and
+proof-of-onward-travel market and looking for a consolidator partner for
+GDS reservation capability. The commercial model is unusual — a high
+volume of short-hold reservations with a low ticketing ratio — so rather
+than squeeze it into a standard sub-agency arrangement, I’d prefer to
+design a per-segment fee structure that compensates you fairly for what
+the volume actually is.
+
+Happy to walk through the full model transparently on a short call —
+would [day] or [day] suit?
+
+Regards, Liam
+
+Follow-up sequence
+
+-   Day 3: one-liner bump (“Any interest in a quick call on the below?
+    The volume is real and I’m signing two partners this month.”)
+-   Day 8: add proof/urgency (“For context — the market leader in this
+    niche does ~170K site visits/month; I’m building the API/white-label
+    layer of it. If holds aren’t a fit for your operation, would
+    ticket-and-void be?”)
+-   Day 15: breakup email (“Closing out my partner shortlist this week —
+    if the timing’s wrong I’ll stop here, but happy to revisit later.”)
+
+------------------------------------------------------------------------
+
+Part 4: B2B White-Label Pitch (run in parallel, weeks 2–3)
+
+Subject: Add proof-of-onward-travel to [Product] — rev share, one API
+call
+
+Hi [Name],
+
+Your users hit the proof-of-onward-travel problem constantly — [visa-run
+customers / travellers activating eSIMs at borders / policyholders
+crossing into Thailand and Indonesia]. Right now they bounce out to
+onwardticket.com and pay a stranger $16.
+
+I’m building a white-label API for exactly this: your brand, one API
+call, a verifiable airline reservation delivered to your user in under a
+minute. You keep [30–40]% of each sale, zero inventory or support burden
+on your side.
+
+I’m signing 3 launch partners before the public release. Worth a
+15-minute call to see if [Product] should be one?
+
+Regards, Liam
+
+Target categories for this pitch: visa agencies (Bangkok, Bali, HCMC,
+Manila), border-run/visa-run tour operators, eSIM apps, nomad insurance
+products, coworking/nomad community platforms, travel agencies
+specialising in Schengen visa applications (India, Philippines, LATAM).
+
+------------------------------------------------------------------------
+
+Part 5: Week-One Checklist
+
+-   ☐ Pull TTAA (Thailand), PTAA (Philippines), ASTINDO (Indonesia)
+    member directories → 40–60 raw targets
+-   ☐ Shortlist 15–20: prioritise IATA agencies advertising
+    sub-agent/B2B portals
+-   ☐ Send Version A to 10 Tier-1 targets; Version B to 4 Tier-2
+    Australian targets
+-   ☐ Register interest with Mystifly + TBO B2B portals (parallel track)
+-   ☐ Book any warm Bangkok contacts for in-person meetings —
+    face-to-face closes this deal category in Thailand
+-   ☐ Draft the qualification call script from Part 2; log every answer
+    (churn tolerance data across agencies is your supply-side moat)
+-   ☐ Send B2B white-label pitch to 5 visa agencies as a
+    demand-validation probe — before the site exists
