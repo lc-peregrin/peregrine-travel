@@ -1,8 +1,34 @@
 # Peregrin Travel — state
 
-Last updated: 2026-07-24, Claude Code design-evolution pass — trust band, Help pill, FAQ CTA,
-self-hosted fonts, and the programmatic SEO template route, all deployed. Site is DEPLOYED and
-ready but still in Duffel/Stripe TEST mode.
+Last updated: 2026-07-24, Claude Code — removed the stale test-mode badge from production.
+**Production is now reported to be on LIVE Duffel/Stripe keys** (see the note below), so the site
+is no longer test-only.
+
+## Done — 2026-07-24, Claude Code: test-mode badge gated out of production
+
+- **Problem:** `public/index.html` rendered a "Live Duffel test-mode data" badge unconditionally.
+  With production now on live keys it was factually wrong and actively trust-damaging on a product
+  whose entire pitch is authenticity.
+- **Fix — gated at the source rather than deleted**, so it survives as a local dev aid:
+  - `server.js` derives `DUFFEL_TEST_MODE` from the key prefix (`duffel_test_`) and returns it as a
+    **boolean** on the existing `/api/pricing` response. The key itself never reaches the browser,
+    and no extra request was added.
+  - `index.html` ships the badge with inline `display:none` and reveals it **only** on an explicit
+    `test_mode === true`. Live keys, a missing field, or a failed request all leave it hidden —
+    the fail-safe direction. Shipping it hidden also prevents a flash before JS runs.
+- **Verified** against the endpoint with a simulated live key (`false`), a test key (`true`) and no
+  key at all (`false`). `.env` was neither read nor modified. Locally (still a test key) the badge
+  correctly still shows, so the dev aid works.
+- **Tests:** new case asserts the badge stays hidden on live keys *and* when the field is absent,
+  and appears only in test mode; the stub DOM now honours inline `display`. 23 passing.
+
+### ⚠ Key-mode status needs confirming in STATE going forward
+This session was told production is on live Duffel/Stripe keys, and the badge fix assumes that.
+Earlier entries in this file still describe the site as test-mode throughout — **those are now
+stale**. Worth a single explicit confirmation of the live/test status of Duffel *and* Stripe (and
+whether the go-live checklist items — durable hold-fee entitlement store, live webhook registration —
+were completed before the switch), then correcting the older entries. The
+`GO-LIVE-CHECKLIST.md` items in `site/` should be re-checked against reality rather than assumed.
 
 ## Done — 2026-07-24, Claude Code design-evolution pass
 
