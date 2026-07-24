@@ -3,6 +3,61 @@
 Last updated: 2026-07-24, Claude Code — RUN_ALL rev 2: blog shipped (the traffic engine). Privacy
 live, ticket conversion behind a flag (OFF), design polish done. Production is on LIVE Duffel keys.
 
+## Done — 2026-07-24, Claude Code: RUN_ALL tasks 5 and 6 + PDF itinerary + sample doc
+
+Four pieces, each committed separately and pushed to `main`. 90 tests passing.
+
+**Task 5 — embassy authority section (`8b8c2c0`).** The single Norway pull-quote became five
+featured cards drawn only from `automation/EMBASSY_QUOTES_VERIFIED.md` (Norway, Germany, Belgium,
+Finland, Denmark), plus a compact "also required by" line for the seven tier-2 countries. Source
+URLs are kept in a markup comment for legal backup. Spain is excluded (no primary source exists)
+and no "don't buy" wording is attributed to India, which only has a real onward-ticket
+requirement. The official quotes now ship in English in every language rather than being
+translated, since translating a quotation misquotes it, so `embassy_quote`/`embassy_cite` were
+removed from the dictionaries and only the surrounding copy is localised. Flags are emoji with
+aria-labels, matching the airport picker's existing `flagEmoji()` output.
+
+**Task 6 — blog + voice pass (`de27fa4`, `6b5b2fd`).** Cowork's rewritten Thailand and Bali
+guides and the new Schengen-visa guide are published. Then roughly 230 em dashes were removed
+from customer-facing copy, each read in context rather than find-and-replaced: the four i18n
+dictionaries, the FAQ dataset in all four languages, markup defaults, JS fallback strings, page
+titles and meta descriptions, the server-rendered sample and SEO pages, Stripe line-item names
+(these show on the checkout page and receipt) and the delivery email. Russian uses a dash as a
+copula, so those became a verb rather than being dropped. A test now guards against regression.
+
+**PDF itinerary (`744fa84`).** The document is populated from the Duffel order instead of
+placeholders: operating carrier and flight number (with an "Operated by" line for codeshares),
+aircraft type, cabin, terminals when supplied, passenger titles and a real issue date. Airline
+logos are drawn as vectors via `svg-to-pdfkit`, because **Duffel serves logos as SVG only and
+pdfkit embeds PNG/JPEG only** — worth remembering. `airline-logos.js` fetches with a 2.5s timeout,
+a size cap and a cache that also remembers misses; every failure falls back to an IATA chip so a
+logo can never block a customer's document. A verification QR now sits by the reservation code.
+
+**`/verify` route added (`744fa84`).** The QR needed a destination and none existed. It
+deliberately does **not** resolve a booking reference to an order: the reference is printed on a
+document anyone might handle, so looking it up would leak passenger data to whoever scans it. The
+page explains how to check with the airline instead.
+
+**Sample document (`45e7c62`).** `/sample-reservation` rebuilt on the real layout with an example
+Singapore Airlines round trip, a bundled carrier logo, fine print cut to two lines, and a
+watermark tiled across the whole document rather than one centred stamp (a single stamp can be
+cropped out of a screenshot). Still static, still noindex.
+
+### Notes for Liam
+
+- The handoff's three PDF "corrections" (em dash, spam line, GDS wording) described strings that
+  were only ever in the `.dc.html` design reference, not in the shipped `pdf.js`. There was no
+  "Check spam" line and no GDS wording to remove. The intent was applied anyway: the fine print
+  now splits into two sentences and credits Duffel as our airline booking provider.
+- `design-exports/Peregrin Itinerary Document.dc.html` was **not on disk** (standing rule 5
+  again), so the PDF was built from the handoff text. Everything specified was implemented; only
+  "match the exact layout" could not be checked against the reference.
+- `WRITING_STYLE.md` does not exist anywhere in the repo. Task 6 stated its rule inline so this
+  did not block, but the file itself is still missing if it is meant to be a reference.
+- Two new dependencies: `svg-to-pdfkit` and `qrcode`, both pure JS.
+- Left deliberately: lone "—" glyphs that mark a not-yet-populated value in the UI and are
+  overwritten by JS. They are placeholders, not prose.
+
 ## Done — 2026-07-24, Claude Code: RUN_ALL rev 2 — blog
 
 `CLAUDE_CODE_RUN_ALL.md` was revised to rev 2 while tasks 1–3 were already complete and deployed;
