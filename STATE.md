@@ -1,9 +1,56 @@
 # Peregrin Travel — state
 
-Last updated: 2026-07-23, end of tonight's Cowork session (project consolidation + site-readiness
-sequencing decision).
+Last updated: 2026-07-24, end of tonight's Cowork session (production bug fix + domain live +
+Duffel/Wise/Stripe KYC in progress + overnight research handoff).
 
-## Done
+## Done — 2026-07-24 session
+
+- **Critical production bug fixed and verified live**: `renderOrder()` and two other spots
+  referenced an undefined global `lang`, throwing a silent `ReferenceError` that broke the
+  confirmation screen for every successful hold in production. Fixed (all three sites now use
+  `localStorage.getItem("peregrin_lang") || "en"`), pushed, and verified live by directly
+  invoking `renderOrder()` against a real order. Documented as a permanent gotcha in
+  `site/CLAUDE.md`.
+- **`peregrin.travel` custom domain connected to the live Vercel deployment** — found and
+  resolved an orphaned domain attachment on an unused Vercel project via "Move Domain"; both
+  `peregrin.travel` and `www.peregrin.travel` now show "Valid Configuration" and resolve to the
+  real site.
+- **Demo/partner-preview panel hidden from regular visitors** — gated behind `?demo=1` query
+  param instead of always-visible, so the live site no longer looks like an internal demo to
+  real visitors while still being usable for partner walkthroughs.
+- **Baseline SEO shipped**: `robots.txt`, `sitemap.xml`, canonical tag, updated title/meta
+  description, OG/Twitter tags, and JSON-LD `Service` structured data, all pointed at the real
+  `www.peregrin.travel` domain.
+- **Duffel go-live KYC, Wise Business account, and Stripe account activation** — walked through
+  live tonight with Liam (screen-share/browser support, no credentials entered by Claude). Wise
+  Business account reached completion ("Individual/Sole Trader", correct business details, all
+  currencies). Stripe activation reached the "statement descriptor" step. Duffel KYC in progress
+  via the Stripe Connect flow. None of these are confirmed fully approved yet — see Blockers.
+  ABN (47707480318) verified directly via ABR Lookup during this process.
+- **Claude transcript review** — read and summarized a user-uploaded transcript on effective
+  Claude prompting technique; validated that Peregrin's existing `CLAUDE.md`/`STATE.md`/
+  `docs/BRAND.md` structure already covers the "persistent context files" pattern it recommended;
+  adopted the "four-block prompt" (Instructions/Context/Task/Output format) structure for the
+  Claude Code handoff below.
+- **Claude Code overnight handoff prepared**: `automation/CLAUDE_CODE_HANDOFF_2026-07-24.md` —
+  scoped strictly to safety/test-coverage work (test harness for the class of bug above, an audit
+  for similar assumed-global bugs, a `site/README.md`, `npm test`), explicitly excluding any
+  pricing/feature/UI changes. Not yet run by Liam as of this writing.
+- **`docs/reference/REVENUE_AND_EXPANSION_RESEARCH.md` written, then extended same night** — the
+  deep-dive Liam asked for: ranked revenue-maximizing feature ideas, UI/interface recommendations,
+  a programmatic-SEO plan (concrete mechanism for `MARKETING_PLAN.md` Phase 3), two distinct
+  subscription/pricing models (B2C frequent-flier plan vs. B2B agent credit-pack model, with a
+  clear recommendation to model the B2B credit-pack first), a ranked shortlist of adjacent
+  travel-related low-overhead businesses (flight delay compensation claims ranked highest fit),
+  and — per Liam's follow-up to broaden beyond travel — a wider "portfolio of many small
+  commission-taking sites" section covering crypto, iGaming, and marketing/SaaS affiliate models,
+  with real economics, real risk data (2025–2026 Google core updates specifically hammering thin
+  affiliate/iGaming content), a regulatory flag on iGaming affiliate licensing, and a ranked
+  recommendation (marketing/SaaS affiliate site first, iGaming last, pending a licensing check).
+  Research/recommendations only — nothing in it has been built; next step is Liam picking what
+  to scope into real Claude Code sessions.
+
+## Done — earlier sessions
 
 - Live demo product (`/site`) fully working end-to-end in Duffel test mode: search, hold, verify,
   PDF, email delivery, white-label branding toggle, 4-language UI (en/es/ru/hi), Stripe Checkout
@@ -29,48 +76,44 @@ sequencing decision).
 
 ## In progress
 
-- Nothing actively in progress — tonight's consolidation is fully wrapped. `peregrine-travel` repo
-  is live on GitHub (`lc-peregrin/peregrine-travel`), pushed, `liamconroy96-cell` has accepted
-  collaborator access.
+- **Duffel go-live KYC (via Stripe Connect)** — in progress, not confirmed complete.
+- **Stripe account activation** — reached the "statement descriptor" step, not confirmed complete.
+- **Wise Business account** — appears complete (sole trader, business details, currencies set)
+  per Liam's own confirmation, not independently re-verified this session.
+- **Claude Code overnight safety-pass** — prompt prepared and handed off
+  (`automation/CLAUDE_CODE_HANDOFF_2026-07-24.md`), not yet run by Liam.
 
-## Next — sequencing decision made 2026-07-23
+## Next
 
-**Liam's explicit call: hold BD outreach (both pipelines) until the site itself is properly
-polished and "clean looking."** Don't start on `docs/BD_PIPELINE.md` open decisions until this
-readiness list is closed out. Site-readiness checklist, in rough priority order:
-
-1. ~~**Real logo/brand asset**~~ — **done 2026-07-23.** Full asset set built and wired in:
-   favicon (with a separate simplified mark for 16px legibility), apple-touch-icon, OG/social
-   preview image, transparent + solid mark variants, wordmark lockup. All in `/design-exports` and
-   `site/public/`, verified live via local server (200s, correct tags in rendered HTML). See
-   `docs/BRAND.md` for details, including a real rendering bug that was caught and fixed
-   (open-path strokes need explicit `fill="none"` or some renderers fill them black).
-2. **Visual QA on tonight's changes** — the Stripe "Pay with card" button and the hold-button
-   double-submit fix were built/tested functionally but not re-screenshotted across the full flow
-   and all 4 languages the way the original redesign was. Worth a fresh pass before calling the
-   site "clean."
-3. **Live re-test of email delivery** — code fix (verified `send.peregrin.travel` domain) was
-   pushed tonight but not re-confirmed live end-to-end since.
-4. **Favicon / link preview polish** — no favicon, no Open Graph image confirmed, both visible the
-   moment someone shares or bookmarks the link.
-5. Not blocking "clean looking" but worth knowing: Duffel is still test-mode (go-live pending) and
-   Stripe is still test/sandbox-mode (business verification not started) — these affect whether
-   the site can take real money/issue real tickets, not how it looks, so lower priority for this
-   specific readiness push but will matter before real BD outreach converts into paying partners.
-
-Once this list is closed, return to `docs/BD_PIPELINE.md`'s open decisions (Pipeline A fate,
-Pipeline B outreach copy).
+1. **Run the Claude Code safety-pass session** (`automation/CLAUDE_CODE_HANDOFF_2026-07-24.md`) —
+   adds test coverage for the bug class that shipped tonight, branch-only, ready to paste in.
+2. **Review `docs/reference/REVENUE_AND_EXPANSION_RESEARCH.md`** and decide which feature(s),
+   if any, to scope into a real (separate, reviewed) Claude Code implementation session.
+3. **Confirm Duffel go-live, Stripe activation, and Wise account status** — all three were
+   mid-flow as of tonight; need a plain status check next session (approved / still pending /
+   blocked on something specific).
+4. Once site-readiness and KYC are both closed out, resume `docs/BD_PIPELINE.md`'s open decisions
+   (Pipeline A fate, Pipeline B outreach copy) per the prior sequencing call — still deferred.
 
 Automation roadmap (`automation/ROADMAP_PROPOSAL.md`) is written and ranked, waiting on Liam's
 go-ahead — independent of the BD-hold decision, could be picked up in parallel if useful.
 
+**Site cosmetic-readiness checklist (logo, visual QA, email delivery, favicon/OG) was already
+fully closed as of 2026-07-23** — see git history for that detail if needed; tonight's work was
+the production bug fix, domain connection, SEO baseline, and KYC/research above.
+
 ## Blockers
 
-- Duffel go-live (production API keys) — application submitted, approval status unknown, no
-  fallback path if rejected.
+- Duffel go-live (production API keys) — KYC in progress via Stripe Connect tonight, not yet
+  confirmed approved. No fallback supply path if rejected.
 - Duffel Stays access — separate request submitted, accommodation flow blocked on it.
-- Real Stripe account is only sandboxed/test-mode; going live needs Stripe's business
-  verification flow completed (not started).
+- Stripe account activation in progress tonight (reached statement-descriptor step) — not yet
+  confirmed fully live/able to take real charges.
+- **The site cannot take real payment or issue real tickets yet even though it looks
+  production-ready** — Duffel and Stripe are both still test/sandbox-mode pending the KYC above.
+  This was an explicit correction to Liam's "ready to make money tonight" framing earlier this
+  session: cosmetic polish (now done) and functional business-readiness (still pending) are two
+  different things.
 
 ## Open decisions
 
