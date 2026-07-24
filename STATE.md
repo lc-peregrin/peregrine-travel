@@ -3,6 +3,50 @@
 Last updated: 2026-07-24, Claude Code — RUN_ALL rev 2: blog shipped (the traffic engine). Privacy
 live, ticket conversion behind a flag (OFF), design polish done. Production is on LIVE Duffel keys.
 
+## Done — 2026-07-24, Claude Code: blog images, affiliate structure, homepage tweaks
+
+Three handoffs, pushed to `main`. 101 tests passing.
+
+**Blog images, source links, affiliate (`a5c6c19`, `8b4fe07`).** Cowork's real SafetyWing links landed
+first as their own commit. Then the template was wired for images: hero from front-matter on both the
+article and the index card, and inline markdown images as lazy responsive figures. A hero is only
+reported when the file is actually on disk, so a post without one degrades cleanly.
+
+Four Unsplash heroes at 1600x800, credited in `content/blog/images/CREDITS.md`. **Unsplash now blocks
+non-browser clients entirely** (401 to curl, `source.unsplash.com` retired, search API needs a key we
+do not have), so these were chosen through the browser, which is also the only way the photographer
+names could be obtained. Attribution had to be real, so that mattered. `heroAlt` was rewritten on
+three posts to describe the image that actually shipped.
+
+The four Schengen citations with a verified primary source now link to it, opening in a new tab with
+noopener/noreferrer; all four URLs return 200. **Norway is deliberately unlinked**: the verified file
+records only "norway.no" with no document URL.
+
+Affiliate structure is a reusable recommended box driven by per-post front-matter plus the disclosure
+line. A partner whose tracking URL is still "#" renders as plain text, never a live-looking button
+that goes nowhere. The disclosure triggers on what a post actually links to, not a flag someone has to
+remember to set.
+
+**Homepage tweaks (`beb6860`).** Gold ribbon rewritten to lead with the benefit ("A real reservation,
+held in your name") with one plane emoji, disclosure fully intact and now pinned by a test asserting
+all three protective claims. Embassy section moved from gold to the soft accent palette. Every country
+links to its guide, with the United States and India going to the index since they have no dedicated
+guide. Guides promoted to a header pill plus a CTA under the trust band.
+
+### Notes for Liam
+
+- **Booking.com and Airalo tracking URLs are still placeholders.** Supply them and they light up;
+  until then those placements render as text, not dead links. SafetyWing is live.
+- Two new blog images are large-ish (Philippines 512K). Fine, but worth replacing with your own
+  photography when you have it, per CREDITS.md.
+- Thailand, Bali and Philippines guides have **no verified official source links**, because
+  `EMBASSY_QUOTES_VERIFIED.md` only covers the Schengen area plus USA/India/Canada/UK/Australia. Those
+  posts cite rules in prose only. If you want citations there, they need verified sources first.
+- Browser screenshot capture stopped working partway through this session, so the final homepage check
+  was done by inspecting the live DOM and computed styles rather than by eye. Everything asserted was
+  confirmed that way (teal applied, zero gold left in the section, all links resolving), but a quick
+  human look at the homepage is worth it.
+
 ## Done — 2026-07-24, Claude Code: RUN_ALL tasks 5 and 6 + PDF itinerary + sample doc
 
 Four pieces, each committed separately and pushed to `main`. 90 tests passing.
