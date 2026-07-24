@@ -3,6 +3,57 @@
 Last updated: 2026-07-24, Claude Code — RUN_ALL rev 2: blog shipped (the traffic engine). Privacy
 live, ticket conversion behind a flag (OFF), design polish done. Production is on LIVE Duffel keys.
 
+## Done — 2026-07-25, Claude Code: embassy grid, sidebar, affiliate slots, entitlement, analytics
+
+Two commits, pushed to `main`. 106 tests passing.
+
+**Embassy 6-card grid (`28639ca`).** Now an even grid (1 col mobile, 2 tablet, 3 desktop). The sixth
+quote is **Canada**, which was already sitting in `EMBASSY_QUOTES_VERIFIED.md` as an optional tier-1
+entry with exact wording and an official IRCC URL (checked, 200). So nothing was invented and no
+existing quote had to be dropped to make the count even. Canada's card links to `/blog` rather than
+the Schengen guide, since pointing a Canada card at a Schengen visa article would mislead.
+
+**Guide sidebar (`28639ca`).** Popular guides, a "Before you fly" checklist, and a reservation CTA.
+Two columns from 980px, stacking below the article on narrow screens rather than hiding, because the
+checklist is the part worth having on a phone.
+
+**SafetyWing (`28639ca`).** Clean campaign link stays the primary CTA in every guide; the reward-code
+bonus line sits directly after it. Nothing was swapped, since the reward is a code and not a link.
+
+**Affiliate slots (`28639ca`).** `AIRALO_LINK`, `AGODA_LINK`, `GETYOURGUIDE_LINK`, `BOOKING_LINK`,
+`SAFETYWING_LINK` resolve at render time from one clearly marked block in `blog.js`. Articles
+reference them by name, so **filling one in on approval is a single-line edit** with no markdown
+changes. An unfilled slot, and a bare `#`, render as plain text rather than a link, which also
+retired the existing Booking.com dead links without touching their markdown.
+
+**Durable entitlement (`116bd64`).** The in-memory Set was the only thing granting document access and
+did not survive a cold start; on Vercel the webhook usually runs in a different instance from the
+download request, so a customer returning without `session_id` could be refused their own document.
+**Stripe is now the store**: a PaymentIntent search by order id, no database to provision. Metadata is
+copied onto the PaymentIntent at checkout because Stripe can search PaymentIntents by metadata but
+not Checkout Sessions.
+
+**Analytics (`116bd64`).** Wired but **OFF** unless `ENABLE_ANALYTICS=true`. Vercel Web Analytics:
+same-origin, cookieless, non-fingerprinting, so no consent banner and nothing contradicting the
+privacy policy.
+
+### Notes for Liam
+
+- **To turn analytics on:** set `ENABLE_ANALYTICS=true` in Vercel's environment variables AND enable
+  Web Analytics in the Vercel dashboard. Both are needed. Worth adding a line to the privacy policy
+  when you do, since it is currently silent on analytics.
+- **To activate an affiliate programme:** edit the one `AFFILIATE_SLOTS` block in `site/blog.js`,
+  replacing `"#"` with the tracking URL. Nothing else to change anywhere.
+- Three of the five "outstanding" items were **already done** in earlier sessions: the two new guides
+  and their hero images are published, `/privacy` is live, and the lighter disclosure is now the
+  standard across all four guides (the banner was duplicating it and is now suppressed when a body
+  already carries one).
+- `CLAUDE_CODE_HANDOFF_2026-07-24_FUNCTIONAL_AND_GUIDES.md` **does not exist** in `automation/`, so
+  that work came from the inline list in the request rather than a spec.
+- **`WRITING_STYLE.md` still does not exist** anywhere in the repo (flagged three sessions running).
+  The no-em-dash rule is enforced by tests regardless, but the file itself is missing.
+  `peregrin/MONETIZATION_PLAN.md` does not exist either.
+
 ## Done — 2026-07-24, Claude Code: blog images, affiliate structure, homepage tweaks
 
 Three handoffs, pushed to `main`. 101 tests passing.
