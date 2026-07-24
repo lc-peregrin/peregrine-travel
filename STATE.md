@@ -1,8 +1,67 @@
 # Peregrin Travel — state
 
-Last updated: 2026-07-24, Claude Code — removed the stale test-mode badge from production.
-**Production is now reported to be on LIVE Duffel/Stripe keys** (see the note below), so the site
-is no longer test-only.
+Last updated: 2026-07-24, Claude Code — **fixed the blank-`family_name` bug that was breaking every
+live hold** (checkout was down on live keys). Production is on LIVE Duffel keys.
+
+## Done — 2026-07-24, Claude Code: live checkout unblocked (blank family_name)
+
+- **Symptom:** every `POST /api/hold` 422'd from Duffel — `validation_error`, "Field 'family_name'
+  can't be blank". Live checkout was completely broken.
+- **Actual root cause — NOT what the report assumed.** The handoff suspected the design pass broke
+  the last-name input's binding. It did not: typing a last name always produced `family_name`
+  correctly (verified in the browser). The real cause is that the traveller-details form shipped
+  with **empty name inputs whose placeholders were real-looking names** ("Liam"/"Conroy"), so they
+  read as already-filled — and **nothing validated them**. A blank last name submitted happily.
+  Duffel test mode didn't enforce the field, so it only surfaced on live keys. The "first name fine,
+  last name blank" split is the signature of **browser autofill** partially filling a form whose
+  inputs had no `name`/`autocomplete` attributes. Fixing "the binding" would have been a no-op.
+- **Fixes shipped:**
+  - Inputs now carry `name` + `autocomplete` (`given-name`/`family-name`/`bday`/`email`) so browsers
+    fill both names rather than one. The name-like placeholders are gone — nothing that is empty
+    should look pre-filled.
+  - Client-side validation blocks submit on empty first name, last name, date of birth or email,
+    with inline per-field errors and focus on the first problem; values are trimmed.
+    (DOB/email included deliberately: they are equally required by Duffel, and non-lead passengers
+    ship with an empty DOB — the same incident one step later.)
+  - Server-side guard rejects blank required fields with a 400 naming them, **before** spending a
+    Duffel call, and trims on the way into the payload.
+  - The blanket `alert()` ("this search result may have already been used") is replaced by an inline
+    error that surfaces the **real** reason; that "expired result" copy is now used only for the
+    offer-request error it actually describes. Server text is HTML-escaped on insertion.
+  - New i18n keys for every new string across all four languages.
+- **Verified** against live Duffel test mode: a hold with "Ada Lovelace" stores the family name on
+  the order; blank and whitespace-only last names are rejected with 400; the full UI flow reaches
+  the confirmation screen with `family_name` in the payload.
+- **Test coverage for the gap that allowed this:** the stub DOM now parses assigned `innerHTML` into
+  real elements, so tests drive the *actual generated* traveller form. Three new tests assert the
+  payload carries a non-empty `family_name` from the last-name input, that a blank last name is
+  blocked with no request sent, and that failures render inline with the real reason. 26 passing.
+  Previously **nothing** covered the dynamically-rendered form, which is why this shipped.
+
+- **Same defect found and fixed in the accommodation guest form.** It carried the identical hazard
+  (name-like placeholders on empty inputs, no `autocomplete`, no validation) plus a customer-facing
+  `alert("Booking failed — check server logs.")`. Gated on Duffel Stays approval so it wasn't
+  breaking today, but it would have failed the same way the moment Stays went live. Validation is
+  now shared between both forms so they can't drift. Unit-tested only — that flow can't be driven
+  end-to-end until Stays access is approved.
+
+### ⚠ Still outstanding: four other `alert()` error paths (NOT fixed — need a decision)
+Found while fixing the above; left alone to keep the urgent fix tight. Two matter:
+1. **`public/index.html` search failure** — shows customers *"Search failed — check server logs."*
+   This is developer language on the **primary path every visitor hits first**.
+2. **Confirm-and-pay failure** — shows *"this uses Duffel's test balance, which may need topping up
+   in the dashboard."* On **live keys this is factually wrong** and leaks internal operations to a
+   customer — the same trust problem as the test-mode badge that was just removed.
+   (The other two are stays rate/quote failures.)
+   All four should become inline errors using the `describeHoldError()` + `.hold-error` pattern now
+   in place. Small follow-up, but it's customer-visible copy so it's Liam's call.
+
+### Lesson worth keeping
+Duffel **test mode does not enforce all required fields that live mode does**. Anything validated
+only by the supplier can pass in test and fail on live keys. Required-field validation belongs in
+our own code (client *and* server), not delegated to the API — see the go-live checklist.
+Second lesson: the test harness had **no coverage of dynamically-rendered markup**, which is why a
+form-binding-class bug shipped. The stub DOM now parses `innerHTML`, so generated forms are testable.
 
 ## Done — 2026-07-24, Claude Code: test-mode badge gated out of production
 
