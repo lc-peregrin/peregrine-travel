@@ -1,8 +1,23 @@
 # Peregrin Travel — state
 
-Last updated: 2026-07-24, Claude Code go-live + FAQ session — TASK 1 (hold fee) + TASK 3 (search
-widgets) merged to main and deployed; FAQ/support page built; confirmation screen localised;
-go-live checklist written. Site is DEPLOYED and ready but still in Duffel/Stripe TEST mode.
+Last updated: 2026-07-24, Claude Code quick-fix pass — reachable FAQ (Help link now routes to /faq)
++ flat-fee price line on the homepage, both deployed. Site is DEPLOYED and ready but still in
+Duffel/Stripe TEST mode.
+
+## Done — 2026-07-24, Claude Code quick-fix pass (Help link + homepage price)
+
+- **Fixed the Help link not reaching the FAQ.** On the live homepage, clicking "Help" (href="/faq")
+  left the URL on "/" instead of navigating, so visitors couldn't reach the FAQ. Root cause: the page
+  relied on default anchor navigation for the /faq route, which wasn't taking effect from the homepage.
+  Fix: added a small client-side nav handler — internal "/" links are intercepted and routed via
+  `history.pushState` + the existing `routeView()` (reload-free single-page transition), with
+  `popstate` handling back/forward. Anchors keep real hrefs, so they still work with JS off or on a
+  direct hit. Verified with a real click: homepage Help → /faq.
+- **Added a flat-fee price line to the homepage**, under the hero search, using existing styles:
+  "One flat fee — US$14.99 (US$19.99 return). No airfare, no hidden charges." Localised en/es/ru/hi.
+  (Previously the price only showed on /faq and in search results.)
+- `npm test` green (21). Deployed to production (test mode). No redesign — a full design evolution
+  is still coming separately (TASK 2, blocked on the real Claude Design exports).
 
 ## Done — 2026-07-24, Claude Code go-live + FAQ session
 
