@@ -1,7 +1,50 @@
 # Peregrin Travel — state
 
-Last updated: 2026-07-24, Claude Code — accommodation hidden, ticket-reservation copy + legal
-disclaimer shipped, PDF restructured, sample page added. Production is on LIVE Duffel keys.
+Last updated: 2026-07-24, Claude Code — RUN_ALL pass: Privacy page published, ticket conversion
+built behind a flag (OFF), design polish shipped. Production is on LIVE Duffel keys.
+
+## Done — 2026-07-24, Claude Code: CLAUDE_CODE_RUN_ALL pass
+
+All three tasks done. 60 tests passing (was 41). Each committed separately and pushed.
+
+**1. Privacy page — LIVE at `/privacy`.** The finalised text arrived in
+`automation/PRIVACY_POLICY_FINAL.md`, unblocking the plumbing built the previous pass. Copied to
+`site/PRIVACY_POLICY.md` (Vercel only deploys `/site`, so the text must live inside it). No code
+change was needed to publish — the route reads the file per request, so adding it flipped `/privacy`
+from 404 to 200 and revealed the footer link. Chrome localises en/es/ru/hi; body English as agreed.
+
+**2. Ticket conversion — BUILT, SHIPPED DISABLED.** `ENABLE_TICKET_CONVERSION=false`; every route
+404s and the UI is hidden while off. Fee is `max($29, 7% × airfare)`. Live re-price on quote AND
+again at checkout, compared against the total the customer actually saw — a moved fare returns the
+new quote instead of silently charging a different amount. Issuance happens ONLY from a cleared
+Stripe payment, is idempotent against webhook retries (in-flight guard + a re-check of Duffel's own
+state), and auto-refunds in full if issuance fails after payment, logging MANUAL INTERVENTION
+REQUIRED if the refund itself fails. **Do not enable** until Duffel live hold orders are on, live
+issuance is tested end-to-end, and the refund path is exercised in test mode.
+
+**3. Design polish — SHIPPED.** Built from the Task B handoff + live tokens per Liam's instruction,
+since `design-exports/Peregrin Conversion Sections.dc.html` is still not present (the RUN_ALL file
+said skip; Liam overrode that mid-run). Closed the real gap the handoff flagged: `.section-h` /
+`.section-sub` were used in the markup with **no CSS at all**, so two homepage headings were falling
+back to browser defaults. Pillars rebuilt as icon-left rows (two-up) so they no longer read as a
+repeat of the four-up persona grid; one icon per persona and pillar; sample-reservation modal with
+the diagonal SAMPLE watermark, opening from the existing links while keeping the real href as a
+no-JS fallback. Reviews section is **component-only**: the source array ships empty and the section
+stays hidden, so no quotes or ratings are invented and nothing blank reaches a customer.
+
+### ⚠ Live bug found and fixed mid-run
+The single-page nav handler intercepted **every** internal link, but `routeView()` only renders `/`
+and `/faq`. So the `/privacy` footer link shipped an hour earlier changed the URL and then silently
+left the visitor on the homepage — **the page never loaded**. Same for the sample-reservation links,
+and it would have hit `/onward-ticket/*`. Root-caused rather than patched per link: client-rendered
+paths are now an explicit allowlist and everything else falls through to a real navigation, so
+future server routes are safe by default. This is the third time this class has appeared
+(`routeView` re-showing the stays flow, `renderOrder` resurrecting hidden buttons) — **any state set
+at load can be undone by a function that re-runs later.**
+
+### Still deliberately not done
+Terms & Conditions remains unwired — entity/jurisdiction placeholders + legal review outstanding.
+Only the finalised Privacy shipped.
 
 ## Done — 2026-07-24, Claude Code: copy/legal pass + accommodation hidden
 
