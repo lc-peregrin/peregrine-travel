@@ -1,7 +1,59 @@
 # Peregrin Travel — state
 
-Last updated: 2026-07-24, Claude Code — **fixed the blank-`family_name` bug that was breaking every
-live hold** (checkout was down on live keys). Production is on LIVE Duffel keys.
+Last updated: 2026-07-24, Claude Code — accommodation hidden, ticket-reservation copy + legal
+disclaimer shipped, PDF restructured, sample page added. Production is on LIVE Duffel keys.
+
+## Done — 2026-07-24, Claude Code: copy/legal pass + accommodation hidden
+
+Seven-step pass, committed step by step. 36 tests passing (was 27).
+
+1. **Accommodation hidden behind `ENABLE_ACCOMMODATION = false`.** It was live while gated on
+   unapproved Duffel Stays — advertising a free product we can't deliver. The whole tab bar is
+   hidden (one product left), `switchTab("stays")` is a no-op, and a paired flag in `server.js`
+   404s all `/api/stays/*` routes so it isn't reachable even if the UI is bypassed. **Trap caught:**
+   `routeView()` runs on every navigation and re-showed `#stays-flow` unconditionally — it would
+   have silently undone the flag. Also fixed: the `<title>`, meta description, OG/Twitter cards and
+   JSON-LD all still advertised "Hotel"/"accommodation" reservations — the most public part of the
+   leak, since that's what shows in search results and link previews.
+2. **Customer-facing error strings** no longer leak internal terms ("check server logs", "Duffel
+   test balance"); both are now inline, localised, and end with "you haven't been charged".
+3–5. **Ticket-reservation copy, footer disclaimer, embassy section.** New hero (eyebrow / headline /
+   sub / "See a sample reservation"), reworded trust pillars, "Flexible by design", a four-card
+   "Perfect for" persona row, the softened checkout disclosure, the always-visible protective
+   footer disclaimer, and "Why a reservation — not a ticket" with **exactly one** named pull-quote
+   (Royal Norwegian Embassy) plus the unattributed framing paragraph.
+6. **Reservation PDF restructured** — "Your trip to {City}", "Airline reservation code: {PNR}
+   ({carrier})", status "Booking confirmed", and the four required fine-print lines, keeping the
+   verify note.
+7. **Static `/sample-reservation`** — watermarked, obviously-example data, no Duffel call, noindex.
+
+**Legal framing enforced throughout:** core noun is always "reservation"; "ticket" only as "ticket
+reservation" or "e-ticket issued once you confirm and pay"; no copy claims a ticket was purchased
+(all nine "purchased ticket" occurrences are negations). The confirmation screen's paid state was
+still reading "Ticketed" — already localised, but non-compliant — so it now reads "E-ticket issued".
+All new/changed strings localised across en/es/ru/hi.
+
+### ⚠ Live financial exposure found and closed (was not in the brief)
+The confirm-and-pay button — labelled "Simulate payment (test balance, no card)" — calls
+`/api/order/:id/confirm`, which tickets the order **out of Peregrin's own Duffel balance with no
+customer payment**. Harmless fake money in test mode, but the site is on live keys, so **any
+customer holding a reservation could have had Peregrin buy them a real ticket for free.** Closed on
+both sides: the button ships hidden and appears only when the server reports test mode (renderOrder
+would otherwise have un-hidden it), and the endpoint 404s unless the Duffel key is a test key —
+hiding a button doesn't stop a direct POST. Verified 404 on a simulated live key.
+
+### Testing
+The PDF renderer was extracted to `site/pdf.js` so its wording is finally testable — the rendered
+PDF compresses and font-subsets its text, so it can't be grepped, and this legally sensitive
+document had **no coverage at all**. It now renders through a fake pdfkit doc asserting the header,
+fine print, verification note, multi-passenger output, and that no wording claims a ticket was
+purchased. Other new guards: exactly one `.pull-quote` block and no other named embassy; the
+disclaimer present in all four languages; error strings free of internal terms; accommodation
+hidden after load.
+
+### Deliberately NOT done
+Terms & Privacy pages are **not wired** — the drafts still carry entity/jurisdiction placeholders
+and need legal review. The footer disclaimer alone was in scope and is shipped.
 
 ## Done — 2026-07-24, Claude Code: live checkout unblocked (blank family_name)
 
