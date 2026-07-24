@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:#16283a; --muted:#5c6b7c; --line:#e2e7ec; --bg:#f8f9fb;
+    --accent:#1c6f8c; --accent-bg:#e8f2f5; --accent-dark:#124a5e;
+    --gold:#c9922e; --gold-bg:#faf1e0; --success:#1f7a5c; --success-bg:#e7f4ee;
+    --serif:'Source Serif 4', Georgia, serif;
+    --sans:'Public Sans', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --mono:ui-monospace, 'SF Mono', Menlo, monospace;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialiased; background:#eef1f4; }
+  a { color:var(--accent); text-decoration:none; }
+  a:hover { color:var(--accent-dark); }
+  h1,h2,h3 { font-family:var(--serif); }
+  .tok { font-family:var(--mono); font-size:.9em; background:var(--gold-bg); color:#8a6414; border-radius:4px; padding:0 5px; border:1px solid #ecd9ad; white-space:nowrap; }
+</style>
+</helmet>
+<section style="padding:40px; display:flex; flex-direction:column; gap:18px;">
+  <div style="max-width:1180px;">
+    <div style="font-family:var(--mono); font-size:12px; color:var(--muted); letter-spacing:.04em; margin-bottom:6px;">TURN 1 · SEO PROGRAMMATIC LANDING TEMPLATE (single, reusable)</div>
+    <h2 style="margin:0 0 4px; font-size:22px; color:var(--ink);">One country/visa template — structure only, every variable is a <span class="tok">{{ token }}</span></h2>
+    <p style="margin:0; font-size:14px; color:var(--muted); max-width:80ch; line-height:1.5;">No real visa/immigration wording — content is supplied separately. This defines the layout, the SEO heading hierarchy, and the exact token slots Claude Code fills per page. Same shell as the homepage/FAQ (tokens, palette, fonts, wing-mark) so pages stay fast and on-brand.</p>
+  </div>
+
+  <div style="display:flex; gap:40px; align-items:flex-start; flex-wrap:wrap;">
+    <!-- the template -->
+    <div id="1a" style="width:760px; flex:0 0 auto;">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+        <span style="font-family:var(--mono); font-size:13px; font-weight:700; color:#fff; background:var(--ink); padding:3px 10px; border-radius:6px;">1a</span>
+        <span style="font-family:var(--mono); font-size:13px; color:var(--muted);">/onward-ticket/<span class="tok">{{ country_slug }}</span></span>
+      </div>
+
+      <div style="border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 20px 50px rgba(16,32,45,.10); background:var(--bg);">
+        <!-- header -->
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 30px; background:#fff; border-bottom:1px solid var(--line);">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <svg width="22" height="22" viewBox="0 0 40 40" fill="none"><path d="M5 28C11 26 16 20 19 8" stroke="var(--accent)" stroke-width="4" stroke-linecap="round"/><path d="M12 31C18 28 23 22 26 11" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" opacity="0.55"/><path d="M19 34C25 31 29 25 32 15" stroke="var(--gold)" stroke-width="4" stroke-linecap="round"/></svg>
+            <span style="font-size:15px; font-weight:800; letter-spacing:.05em; text-transform:uppercase;">Peregrin</span>
+          </div>
+          <a href="#1a" style="display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; color:var(--accent-dark); background:var(--accent-bg); border:1px solid #cfe4ea; border-radius:100px; padding:6px 13px;"><span>?</span> Help &amp; FAQ</a>
+        </div>
+
+        <div style="padding:22px 34px 36px;">
+          <!-- breadcrumb -->
+          <div style="font-size:12px; color:var(--muted); margin-bottom:16px;"><a href="#1a" style="color:var(--muted);">Home</a> › <a href="#1a" style="color:var(--muted);">Onward ticket</a> › <span style="color:var(--ink); font-weight:600;"><span class="tok">{{ Country }}</span></span></div>
+
+          <!-- H1 -->
+          <p style="font-size:11px; font-weight:700; letter-spacing:.09em; color:var(--accent); text-transform:uppercase; margin:0 0 10px;">Proof of onward travel</p>
+          <h1 style="font-size:32px; line-height:1.15; letter-spacing:-.02em; margin:0 0 14px; font-weight:600;">Proof of onward travel for <span class="tok" style="font-family:var(--mono); font-size:.7em; vertical-align:middle;">{{ Country }}</span></h1>
+          <p style="font-size:15.5px; line-height:1.6; color:var(--muted); margin:0 0 8px;"><span class="tok">{{ intro_paragraph }}</span></p>
+          <p style="font-size:11.5px; color:var(--muted); font-family:var(--mono);">Updated <span class="tok">{{ updated_date }}</span> · reading time <span class="tok">{{ read_time }}</span></p>
+
+          <!-- quick answer / snippet target -->
+          <div style="margin-top:22px; background:var(--accent-bg); border:1px solid #cfe4ea; border-radius:12px; padding:20px 22px;">
+            <div style="font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:var(--accent-dark); margin-bottom:8px;">Quick answer</div>
+            <p style="font-size:14.5px; line-height:1.55; margin:0; color:var(--ink);"><strong><span class="tok">{{ quick_question }}</span></strong> <span class="tok">{{ quick_answer }}</span></p>
+          </div>
+
+          <!-- primary CTA into the tool -->
+          <div style="margin-top:20px; background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; box-shadow:0 10px 26px rgba(16,32,45,.05);">
+            <div style="padding:20px 22px;">
+              <div style="font-weight:700; font-size:16px; margin-bottom:2px;">Get an onward ticket for <span class="tok" style="font-size:.8em;">{{ Country }}</span></div>
+              <div style="font-size:13px; color:var(--muted); margin-bottom:14px;">Real fares, live from the airline — prefilled for a common exit route.</div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <div style="flex:1; min-width:96px;"><div style="font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin-bottom:5px;">From</div><div style="border:1px solid var(--line); border-radius:8px; padding:10px 12px; font-size:13px; font-weight:600;"><span class="tok">{{ from }}</span></div></div>
+                <div style="flex:1; min-width:96px;"><div style="font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin-bottom:5px;">To</div><div style="border:1px solid var(--line); border-radius:8px; padding:10px 12px; font-size:13px; font-weight:600;"><span class="tok">{{ to }}</span></div></div>
+                <div style="flex:1.3; min-width:110px;"><div style="font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin-bottom:5px;">Depart</div><div style="border:1px solid var(--line); border-radius:8px; padding:10px 12px; font-size:13px;"><span class="tok">{{ depart }}</span></div></div>
+              </div>
+              <button style="width:100%; margin-top:14px; background:var(--ink); color:#fff; border:none; border-radius:8px; padding:13px; font-size:14px; font-weight:700; font-family:var(--sans); cursor:pointer;">Search onward flights →</button>
+              <div style="text-align:center; font-size:12px; color:var(--muted); margin-top:10px;"><strong style="color:var(--accent-dark);">One flat fee — US$14.99</strong> (US$19.99 return). No airfare, no hidden charges.</div>
+            </div>
+            <div style="display:flex; gap:16px; padding:12px 22px; background:var(--accent-bg); border-top:1px solid #d3e6ec; flex-wrap:wrap;">
+              <div style="font-size:12px; font-weight:600; color:var(--accent-dark);">✓ Real airline PNR</div>
+              <div style="font-size:12px; font-weight:600; color:var(--accent-dark);">✓ Independently verifiable</div>
+              <div style="font-size:12px; font-weight:600; color:var(--accent-dark);">✓ No ticket charged unless you confirm</div>
+            </div>
+          </div>
+
+          <!-- requirement detail (H2) -->
+          <h2 style="font-size:22px; margin:34px 0 12px; font-weight:600;">What <span class="tok" style="font-size:.6em; vertical-align:middle;">{{ Country }}</span> requires</h2>
+          <p style="font-size:14.5px; line-height:1.6; color:var(--ink); margin:0 0 14px;"><span class="tok">{{ requirement_body }}</span></p>
+          <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:6px 22px;">
+            <div style="display:flex; justify-content:space-between; padding:13px 0; border-bottom:1px solid var(--line); font-size:14px; gap:12px;"><span style="color:var(--muted);">Accepted proof</span><span style="font-weight:600; text-align:right;"><span class="tok">{{ accepted_proof }}</span></span></div>
+            <div style="display:flex; justify-content:space-between; padding:13px 0; border-bottom:1px solid var(--line); font-size:14px; gap:12px;"><span style="color:var(--muted);">Who checks</span><span style="font-weight:600; text-align:right;"><span class="tok">{{ who_checks }}</span></span></div>
+            <div style="display:flex; justify-content:space-between; padding:13px 0; font-size:14px; gap:12px;"><span style="color:var(--muted);">Typical hold window</span><span style="font-weight:600; text-align:right;"><span class="tok">{{ hold_window }}</span></span></div>
+          </div>
+
+          <!-- how it works (H2) -->
+          <h2 style="font-size:22px; margin:32px 0 14px; font-weight:600;">How it works</h2>
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px;">
+            <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px;"><div style="width:26px; height:26px; border-radius:7px; background:var(--accent-bg); color:var(--accent-dark); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; margin-bottom:10px;">1</div><div style="font-weight:700; font-size:13.5px; margin-bottom:4px;">Search your route</div><div style="font-size:12.5px; color:var(--muted); line-height:1.45;">Live airline fares via Duffel.</div></div>
+            <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px;"><div style="width:26px; height:26px; border-radius:7px; background:var(--accent-bg); color:var(--accent-dark); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; margin-bottom:10px;">2</div><div style="font-weight:700; font-size:13.5px; margin-bottom:4px;">Hold a real reservation</div><div style="font-size:12.5px; color:var(--muted); line-height:1.45;">A genuine PNR, held not ticketed.</div></div>
+            <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px;"><div style="width:26px; height:26px; border-radius:7px; background:var(--accent-bg); color:var(--accent-dark); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; margin-bottom:10px;">3</div><div style="font-weight:700; font-size:13.5px; margin-bottom:4px;">Get your document</div><div style="font-size:12.5px; color:var(--muted); line-height:1.45;">Branded PDF, emailed to you.</div></div>
+          </div>
+
+          <!-- trust signals (H2) -->
+          <h2 style="font-size:22px; margin:32px 0 14px; font-weight:600;">A reservation that holds up</h2>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="background:#fff; border:1px solid var(--line); border-radius:10px; padding:14px 16px; display:flex; gap:12px; align-items:flex-start;"><span style="color:var(--success); font-weight:800;">✓</span><span style="font-size:13.5px; line-height:1.5;"><strong>A real reservation, and you can prove it.</strong> Verify the booking reference against the airline's own record.</span></div>
+            <div style="background:#fff; border:1px solid var(--line); border-radius:10px; padding:14px 16px; display:flex; gap:12px; align-items:flex-start;"><span style="color:#8a6414; font-weight:800;">i</span><span style="font-size:13.5px; line-height:1.5;"><strong>Straight about what it is.</strong> A real held reservation, not a purchased ticket — stated plainly on the document.</span></div>
+          </div>
+
+          <!-- FAQ (H2) -->
+          <h2 style="font-size:22px; margin:32px 0 14px; font-weight:600;"><span class="tok" style="font-size:.6em; vertical-align:middle;">{{ Country }}</span> onward-ticket FAQ</h2>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="background:#fff; border:1px solid var(--line); border-radius:10px; padding:15px 18px;"><div style="display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:14px; gap:12px;"><span class="tok">{{ faq_q1 }}</span><span style="color:var(--muted);">+</span></div></div>
+            <div style="background:#fff; border:1px solid var(--line); border-radius:10px; padding:15px 18px;"><div style="display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:14px; gap:12px;"><span class="tok">{{ faq_q2 }}</span><span style="color:var(--muted);">+</span></div></div>
+            <div style="background:#fff; border:1px solid var(--line); border-radius:10px; padding:15px 18px;"><div style="display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:14px; gap:12px;"><span class="tok">{{ faq_q3 }}</span><span style="color:var(--muted);">+</span></div></div>
+            <div style="background:#fff; border:1px solid var(--line); border-radius:10px; padding:15px 18px;"><div style="display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:14px; gap:12px;"><span class="tok">{{ faq_q4 }}</span><span style="color:var(--muted);">+</span></div></div>
+          </div>
+          <p style="font-size:12px; color:var(--muted); margin:12px 2px 0; line-height:1.5;">↳ These 4 Q&amp;A pairs also emit as <span class="tok">FAQPage</span> JSON-LD for featured snippets &amp; AI-answer citation.</p>
+
+          <!-- internal links -->
+          <div style="margin-top:30px; border-top:1px solid var(--line); padding-top:20px;">
+            <div style="font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin-bottom:12px;">Keep reading</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px 20px; font-size:13.5px;">
+              <a href="#1a"><span class="tok">{{ related_1 }}</span> →</a>
+              <a href="#1a"><span class="tok">{{ related_2 }}</span> →</a>
+              <a href="#1a">All Help &amp; FAQ answers →</a>
+              <a href="#1a">Reserve a flight now →</a>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div style="margin-top:28px; background:var(--ink); border-radius:14px; padding:24px 28px; text-align:center; color:#fff;">
+            <div style="font-size:18px; font-weight:600; font-family:var(--serif); margin-bottom:5px;">Get your onward ticket for <span class="tok" style="font-size:.75em;">{{ Country }}</span></div>
+            <div style="font-size:13.5px; color:#c3ccd6; margin-bottom:16px;">Real, verifiable, in about a minute — one flat fee.</div>
+            <a href="#1a" style="display:inline-block; background:#fff; color:var(--ink); border-radius:9px; padding:12px 24px; font-size:14px; font-weight:700;">Reserve a flight →</a>
+          </div>
+        </div>
+
+        <div style="background:var(--ink); color:#8ea0b2; padding:18px 34px; font-size:12px;">Real reservations · Independently verifiable · Delivered in minutes · Secured by Stripe</div>
+      </div>
+    </div>
+
+    <!-- token + SEO legend -->
+    <div style="width:340px; flex:0 0 auto; display:flex; flex-direction:column; gap:16px; padding-top:38px;">
+      <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px;">
+        <div style="font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:var(--accent); margin-bottom:10px;">Title + meta pattern</div>
+        <div style="font-size:12px; color:var(--muted); line-height:1.5;">
+          <div style="margin-bottom:8px;"><strong style="color:var(--ink);">&lt;title&gt;</strong><br><span class="tok">{{ Country }}</span> onward ticket &amp; proof of onward travel — Peregrin</div>
+          <div><strong style="color:var(--ink);">meta description</strong><br>A real, verifiable onward reservation for <span class="tok">{{ Country }}</span> in minutes — held with the airline, no ticket required. <span class="tok">{{ meta_hook }}</span></div>
+        </div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px;">
+        <div style="font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:var(--accent); margin-bottom:10px;">Heading hierarchy</div>
+        <div style="font-family:var(--mono); font-size:12px; color:var(--muted); line-height:1.8;">
+          H1 · Proof of onward travel for {{Country}}<br>
+          &nbsp;&nbsp;H2 · What {{Country}} requires<br>
+          &nbsp;&nbsp;H2 · How it works<br>
+          &nbsp;&nbsp;H2 · A reservation that holds up<br>
+          &nbsp;&nbsp;H2 · {{Country}} onward-ticket FAQ<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;H3 · each question (schema)
+        </div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px;">
+        <div style="font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:var(--accent); margin-bottom:10px;">Dataset fields (per page)</div>
+        <div style="font-family:var(--mono); font-size:11.5px; color:#8a6414; line-height:1.85;">country_slug, Country, intro_paragraph, updated_date, read_time, quick_question, quick_answer, from, to, depart, requirement_body, accepted_proof, who_checks, hold_window, faq_q1–q4 (+ answers), related_1, related_2, meta_hook</div>
+      </div>
+      <div style="background:var(--gold-bg); border:1px solid #ecd9ad; border-radius:12px; padding:16px;">
+        <div style="font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:#8a6414; margin-bottom:6px;">Not thin</div>
+        <div style="font-size:12.5px; color:var(--ink); line-height:1.5;">Per-page difference lives in <span class="tok" style="font-size:.9em;">requirement_body</span>, the quick answer, and 4 real FAQs — plus a working tool CTA on every page. That transactional function + unique text is the defence against 2025–26 thin-content signals.</div>
+      </div>
+      <div style="background:var(--accent-bg); border:1px solid #cfe4ea; border-radius:12px; padding:16px;">
+        <div style="font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:var(--accent-dark); margin-bottom:6px;">Language wedge</div>
+        <div style="font-size:12.5px; color:var(--ink); line-height:1.5;">Same template drives the non-English pages (MARKETING_PLAN §3): <span class="tok" style="font-size:.9em;">{{ lang }}</span> localises all tokens — e.g. <span style="font-family:var(--mono); font-size:11px;">/es/prueba-de-viaje/{{country_slug}}</span>.</div>
+      </div>
+    </div>
+  </div>
+</section>
+</x-dc>
+</body>
+</html>

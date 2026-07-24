@@ -1,8 +1,49 @@
 # Peregrin Travel — state
 
-Last updated: 2026-07-24, Claude Code quick-fix pass — reachable FAQ (Help link now routes to /faq)
-+ flat-fee price line on the homepage, both deployed. Site is DEPLOYED and ready but still in
-Duffel/Stripe TEST mode.
+Last updated: 2026-07-24, Claude Code design-evolution pass — trust band, Help pill, FAQ CTA,
+self-hosted fonts, and the programmatic SEO template route, all deployed. Site is DEPLOYED and
+ready but still in Duffel/Stripe TEST mode.
+
+## Done — 2026-07-24, Claude Code design-evolution pass
+
+Integrated the Claude Design **evolution bundle** (`design-exports/design_handoff/
+design_handoff_evolution_pass/`) — the exports finally landed on disk, unblocking the work that was
+previously stuck. The `.dc.html` files were used as **visual reference only**; every change was
+recreated with the site's existing tokens/classes/i18n, per the bundle's README mapping.
+
+- **Typeface decision resolved and shipped: Source Serif 4 (h1/h2) + Public Sans (body),
+  SELF-HOSTED** rather than a Google Fonts `<link>` — no third-party request, which fits the
+  trust/independence positioning. 12 woff2 subsets (latin, latin-ext, + cyrillic for the serif),
+  412 KB, with an OFL notice in `site/public/fonts/`. Cyrillic body text and all Devanagari fall
+  through to the system stack (those subsets don't exist in these families), so the fallback stack
+  is deliberately kept. **This closes the "self-host the fonts" item on `GO-LIVE-CHECKLIST.md`.**
+- **Trust band** — the single-line footer trust row is now four pillar cards on a soft accent
+  gradient, with the "held reservation, not a ticket" disclosure promoted into a prominent gold
+  ribbon above the footer. `footer_trust` kept as a screen-reader fallback. New per-pillar i18n
+  keys in all four languages.
+- **Help nav** — the existing `.header-link` restyled into the accent-tinted pill with a "?" glyph
+  (a CSS `::before`, since `applyLang` sets `textContent`). CSS only; the nav JS was not touched.
+- **FAQ page** — added the dark "Ready when you are" CTA card back into the tool. Accommodation FAQ
+  still deliberately **out** pending Duffel Stays. (The `ticketed_title`/`ticketed_sub` English-only
+  gap was already closed in the previous pass — verified localised ×4.)
+- **Programmatic SEO template — the one real build.** New server-rendered route
+  `GET /onward-ticket/:country` in `server.js`, driven by a per-country dataset, emitting `FAQPage`
+  JSON-LD from the same four Q&A pairs it renders, with the legend's title/meta pattern and exact
+  H2 sequence. `sitemap.xml` is now **generated** from that dataset (the static file was removed so
+  there's a single source of truth).
+- **New test**: asserts all four languages define the same i18n key set (catches a key added to
+  `en` but forgotten elsewhere). 22 tests passing.
+
+### ⚠ The SEO pages are PLACEHOLDER — real content still needed
+Shipped with **one clearly-placeholder example country** (`/onward-ticket/example-country`) whose
+every value is still a literal `{{ token }}`. **No real visa/immigration text has been written** —
+that dataset is supplied separately, as the brief required. Placeholder entries render
+`noindex,nofollow` and are **excluded from the sitemap**, so an unfinished page can never be indexed
+as thin content (the 2025–26 core-update risk the design brief calls out). Unseeded countries 404.
+**Next step for this: supply the real per-country dataset**, then flip `placeholder: false`.
+
+Out of scope and untouched: payment/hold ordering — the "Duffel hold created before the fee is
+paid" economics flag remains a separate decision for Liam.
 
 ## Done — 2026-07-24, Claude Code quick-fix pass (Help link + homepage price)
 

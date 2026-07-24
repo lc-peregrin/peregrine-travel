@@ -76,6 +76,14 @@ detail but not a developer — plain-language explanations for anything requirin
    kind without Liam's explicit approval first — draft and hold, always.
 4. **Commit and push after meaningful changes.** Don't let real work sit uncommitted.
 
+5. **Design outputs must reach the LOCAL repo before Claude Code runs.** Claude Design runs in
+   a SEPARATE project and can only READ this repo, not write to it — so its mockups and
+   `RATIONALE.md` do NOT appear in the local `/design-exports/` automatically. They must be
+   brought across (Liam downloads them into the local `/design-exports/`, or Cowork writes them
+   via the connected folder) and confirmed present on disk BEFORE Claude Code integrates. A
+   design pass is NOT done until its files are verified in the LOCAL `/design-exports/`. (This
+   has silently blocked Claude Code twice with 'missing' design files.)
+
 ## Open items worth knowing about
 
 - Google Drive / account identity: business Drive content lives under `lc@peregrin.travel`

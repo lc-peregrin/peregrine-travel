@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:#16283a; --muted:#5c6b7c; --line:#e2e7ec; --bg:#f8f9fb;
+    --accent:#1c6f8c; --accent-bg:#e8f2f5; --accent-dark:#124a5e;
+    --gold:#c9922e; --gold-bg:#faf1e0; --success:#1f7a5c; --success-bg:#e7f4ee;
+    --serif:'Source Serif 4', Georgia, serif;
+    --sans:'Public Sans', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --mono:ui-monospace, 'SF Mono', Menlo, monospace;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialiased; background:var(--bg); }
+  a { color:var(--accent); text-decoration:none; }
+  a:hover { color:var(--accent-dark); }
+  h1,h2,h3 { font-family:var(--serif); }
+</style>
+</helmet>
+<section style="background:radial-gradient(1000px 400px at 50% -160px, var(--accent-bg), transparent 70%), var(--bg); min-height:100vh;">
+  <!-- header (matches homepage chrome) -->
+  <div style="max-width:760px; margin:0 auto; padding:0 24px;">
+    <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 0; gap:16px;">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <svg width="26" height="26" viewBox="0 0 40 40" fill="none"><path d="M5 28C11 26 16 20 19 8" stroke="var(--accent)" stroke-width="4" stroke-linecap="round"/><path d="M12 31C18 28 23 22 26 11" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" opacity="0.55"/><path d="M19 34C25 31 29 25 32 15" stroke="var(--gold)" stroke-width="4" stroke-linecap="round"/></svg>
+        <span style="font-size:17px; font-weight:800; letter-spacing:.05em; text-transform:uppercase;">Peregrin</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:16px;">
+        <a href="#" style="font-size:13.5px; font-weight:600; color:var(--muted);">How it works</a>
+        <a href="#" style="display:inline-flex; align-items:center; gap:6px; font-size:13.5px; font-weight:700; color:var(--accent-dark); background:var(--accent-bg); border:1px solid #cfe4ea; border-radius:100px; padding:7px 15px;"><span>?</span> Help &amp; FAQ</a>
+        <span style="font-size:12.5px; color:var(--muted); border:1px solid var(--line); border-radius:100px; padding:6px 12px; background:#fff;">EN ▾</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:760px; margin:0 auto; padding:14px 24px 70px;">
+    <div style="font-size:12px; color:var(--muted); margin-bottom:16px;"><a href="#">← Back to Peregrin</a></div>
+
+    <p style="font-size:11px; font-weight:700; letter-spacing:.09em; color:var(--accent); text-transform:uppercase; margin:0 0 10px;">Help &amp; FAQ</p>
+    <h1 style="font-size:32px; line-height:1.15; letter-spacing:-.02em; margin:0 0 12px; font-weight:600;">A real, verifiable reservation — and how it works</h1>
+    <p style="font-size:16px; line-height:1.55; color:var(--muted); margin:0 0 30px; max-width:56ch;">Everything you might want to check before you rely on this at a border, a check-in desk, or in a visa application. Short version: it's genuine, you can prove it, and we're straight about exactly what it is.</p>
+
+    <!-- how it works -->
+    <h2 style="font-size:22px; margin:0 0 16px; font-weight:600;">How it works</h2>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:14px;">
+      <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px;">
+        <div style="width:30px; height:30px; border-radius:8px; background:var(--accent-bg); color:var(--accent-dark); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; margin-bottom:12px;">1</div>
+        <div style="font-weight:700; font-size:14.5px; margin-bottom:5px;">Search your route</div>
+        <div style="font-size:13px; color:var(--muted); line-height:1.5;">Enter where you're flying from and to, and your dates. We pull live fares directly from the airlines through Duffel.</div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px;">
+        <div style="width:30px; height:30px; border-radius:8px; background:var(--accent-bg); color:var(--accent-dark); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; margin-bottom:12px;">2</div>
+        <div style="font-weight:700; font-size:14.5px; margin-bottom:5px;">Hold a real reservation</div>
+        <div style="font-size:13px; color:var(--muted); line-height:1.5;">We create a genuine reservation with the airline in your name — a real booking reference (PNR), held, not ticketed. No airfare is charged.</div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px;">
+        <div style="width:30px; height:30px; border-radius:8px; background:var(--accent-bg); color:var(--accent-dark); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; margin-bottom:12px;">3</div>
+        <div style="font-weight:700; font-size:14.5px; margin-bottom:5px;">Get your document</div>
+        <div style="font-size:13px; color:var(--muted); line-height:1.5;">Download a clean, branded itinerary with your booking reference — ready for check-in, immigration, or a visa application. Emailed to you too.</div>
+      </div>
+    </div>
+
+    <!-- pricing callout -->
+    <div style="background:var(--accent-bg); border:1px solid #cfe4ea; border-radius:12px; padding:20px 22px; margin-bottom:34px;">
+      <div style="display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;">
+        <span style="font-size:22px; font-weight:800; font-family:var(--serif); color:var(--accent-dark);">One flat fee — US$14.99</span>
+        <span style="font-size:13.5px; color:var(--muted);">US$19.99 for a return or multi-city reservation.</span>
+      </div>
+      <div style="font-size:13.5px; color:var(--ink); line-height:1.55; margin-top:6px;">No airfare, no hidden charges, no card surcharge. If you later decide you actually want to fly, you can confirm and pay for the ticket before the reservation expires.</div>
+    </div>
+
+    <!-- trust pillars -->
+    <h2 style="font-size:22px; margin:0 0 16px; font-weight:600;">Why travellers trust Peregrin</h2>
+    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:34px;">
+      <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px; display:flex; gap:16px;">
+        <div style="width:34px; height:34px; flex-shrink:0; border-radius:9px; background:var(--success-bg); color:var(--success); display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:800;">✓</div>
+        <div><div style="font-weight:700; font-size:15px; margin-bottom:4px;">It's a real reservation, and you can prove it.</div><div style="font-size:13.5px; color:var(--muted); line-height:1.55;">Your booking reference is a genuine airline record, not a picture of one. Anyone — an airline agent, an immigration officer, a visa officer — can check it directly against the airline's own system.</div></div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px; display:flex; gap:16px;">
+        <div style="width:34px; height:34px; flex-shrink:0; border-radius:9px; background:var(--gold-bg); color:#8a6414; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:800;">i</div>
+        <div><div style="font-weight:700; font-size:15px; margin-bottom:4px;">We're straight about what it is.</div><div style="font-size:13.5px; color:var(--muted); line-height:1.55;">It's a real held reservation, not a purchased ticket — and we say so plainly, on the document itself. That honesty is exactly why it holds up: you're showing something real, described accurately.</div></div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px; display:flex; gap:16px;">
+        <div style="width:34px; height:34px; flex-shrink:0; border-radius:9px; background:var(--accent-bg); color:var(--accent-dark); display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:800;">⚡</div>
+        <div><div style="font-weight:700; font-size:15px; margin-bottom:4px;">It's fast.</div><div style="font-size:13.5px; color:var(--muted); line-height:1.55;">Search, hold, and document in about a minute. You get it on screen immediately and in your inbox.</div></div>
+      </div>
+    </div>
+
+    <!-- FAQ accordion -->
+    <h2 style="font-size:22px; margin:0 0 16px; font-weight:600;">Questions, answered plainly</h2>
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px 20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:15px;">Is this legal?<span style="color:var(--accent); font-size:18px;">–</span></div>
+        <p style="font-size:13.5px; color:var(--muted); line-height:1.6; margin:11px 0 0;">Yes. A held reservation is a standard, airline-sanctioned feature — airlines let bookings be held before they're paid for and ticketed. We create that hold directly with the airline through Duffel, their official booking platform. We don't forge documents or fake booking references; everything we issue is a real record you can verify. What you do with a genuine reservation is your responsibility, and requirements differ by country — so we're transparent about exactly what the document is, and isn't.</p>
+      </div>
+      <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px 20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:15px;">Will it be accepted at check-in, immigration, or for my visa?<span style="color:var(--muted); font-size:18px;">+</span></div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px 20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:15px;">How is this different from a "fake" or edited ticket?<span style="color:var(--muted); font-size:18px;">+</span></div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px 20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:15px;">What exactly do I get?<span style="color:var(--muted); font-size:18px;">+</span></div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px 20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:15px;">How long is the reservation valid? When does it expire?<span style="color:var(--muted); font-size:18px;">+</span></div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px 20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:15px;">Do you charge me for the flight?<span style="color:var(--muted); font-size:18px;">+</span></div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px 20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:15px;">What's your refund policy?<span style="color:var(--muted); font-size:18px;">+</span></div>
+      </div>
+      <div style="background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px 20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:15px;">Is my payment secure?<span style="color:var(--muted); font-size:18px;">+</span></div>
+      </div>
+    </div>
+
+    <!-- CTA back to tool -->
+    <div style="margin-top:32px; background:var(--ink); border-radius:14px; padding:28px 30px; text-align:center; color:#fff;">
+      <h2 style="font-size:20px; margin:0 0 6px; font-weight:600; color:#fff;">Ready when you are</h2>
+      <p style="font-size:14px; color:#c3ccd6; margin:0 0 18px; line-height:1.5;">Hold a real, verifiable reservation in about a minute — one flat fee, nothing added later.</p>
+      <a href="#" style="display:inline-block; background:#fff; color:var(--ink); border-radius:9px; padding:13px 26px; font-size:14.5px; font-weight:700;">Reserve a flight →</a>
+    </div>
+
+    <div style="text-align:center; margin-top:28px; font-size:12px; color:var(--muted); line-height:1.7;">
+      Real reservations · Independently verifiable · Delivered in minutes · Secured by Stripe<br>
+      Questions? <a href="#">hello@peregrin.travel</a>
+    </div>
+  </div>
+</section>
+</x-dc>
+</body>
+</html>
