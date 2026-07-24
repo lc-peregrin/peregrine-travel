@@ -1,7 +1,43 @@
 # Peregrin Travel — state
 
-Last updated: 2026-07-24, Claude Code — RUN_ALL pass: Privacy page published, ticket conversion
-built behind a flag (OFF), design polish shipped. Production is on LIVE Duffel keys.
+Last updated: 2026-07-24, Claude Code — RUN_ALL rev 2: blog shipped (the traffic engine). Privacy
+live, ticket conversion behind a flag (OFF), design polish done. Production is on LIVE Duffel keys.
+
+## Done — 2026-07-24, Claude Code: RUN_ALL rev 2 — blog
+
+`CLAUDE_CODE_RUN_ALL.md` was revised to rev 2 while tasks 1–3 were already complete and deployed;
+the only new work was **task 4, the blog**. 71 tests passing (was 60).
+
+**Blog is LIVE at `/blog` and `/blog/:slug`**, launched with the two guides already in
+`site/content/blog/` (Thailand, Bali). Server-rendered so it's fast and crawlable and doesn't depend
+on client JS. **Publishing a new guide is dropping a `.md` into `site/content/blog/` — no code
+change, no redeploy logic.** Front-matter: `title, description, slug, keyword, date, lang,
+readingTime`.
+
+- New `site/blog.js` module (front-matter parser + renderers), kept out of `server.js` so it's
+  unit-testable. Markdown via `marked`; raw HTML is dropped at the renderer, which sanitises without
+  a DOM library.
+- SEO done properly: per-article title/description, self-referencing canonical, OG + Twitter,
+  `Article` + `BreadcrumbList` JSON-LD (datePublished from front-matter, author/publisher Peregrin),
+  `Blog` + `ItemList` on the index, one `<h1>` per page, semantic `<article>`.
+- Sitemap now carries `/blog`, every article with **its own** front-matter date as lastmod, and
+  `/privacy`. **Fixed a bug found while doing it:** the sitemap stamped *today* on every URL, which
+  is a poor crawl signal — it now honours a per-url lastmod.
+- Design on existing tokens/fonts, no new colours: editorial index cards (destination chip, reading
+  time, hover lift); article at ~66ch / 18px / 1.75 with serif headings; the in-article "where
+  Peregrin fits" quote styled as a proper accent pull-quote (the handoff explicitly wanted it not
+  reading as a code block); end-of-article CTA card, related guides, breadcrumbs, back link.
+- **"Guides" added to the header nav and footer** (localised ×4) so the blog is discoverable and
+  passes internal link equity both ways with the homepage.
+
+The one h1 detail worth remembering: each article body already opens with its own `#` heading, so
+that heading is lifted out and rendered as the page headline while the longer front-matter `title`
+stays as the `<title>`/OG string. Two competing h1s would otherwise ship on every article.
+
+### Next for the blog
+More guides = more `.md` files (the handoff notes they come from approved Notion guides). The
+handoff's nice-to-haves are still open: a destinations filter on the index, and richer related-guide
+logic (currently "other guides, newest first").
 
 ## Done — 2026-07-24, Claude Code: CLAUDE_CODE_RUN_ALL pass
 

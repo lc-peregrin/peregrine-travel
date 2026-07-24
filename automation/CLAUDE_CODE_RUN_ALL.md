@@ -31,3 +31,10 @@ a government seal; do not touch the search tool, checkout, PDF, or pricing. Comm
 ## Notes
 - Do NOT wire the full Terms & Conditions / Privacy *drafts* (entity placeholders + need legal review).
   Only the finalised interim Privacy in task 1.
+
+## 4. Blog (beautiful, SEO-first)  (HIGH-VALUE — the traffic engine)
+Follow `automation/CLAUDE_CODE_HANDOFF_2026-07-24_BLOG.md` in full. Build `/blog` (index) and
+`/blog/:slug` (article) rendering the markdown files already in `site/content/blog/` (Thailand +
+Bali launch articles present). Beautiful typography-forward design on the existing tokens/fonts,
+full SEO (canonical, OG/Twitter, JSON-LD Article+BreadcrumbList, sitemap, robots), footer/nav link.
+Tests for 200 + title + canonical. Commit + push; update STATE.md.
