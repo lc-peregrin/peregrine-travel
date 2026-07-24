@@ -1,6 +1,102 @@
 # Peregrin Travel — state
 
-Last updated: 2026-07-24, end of tonight's Cowork session (production bug fix + domain live +
+Last updated: 2026-07-24, Claude Code go-live + FAQ session — TASK 1 (hold fee) + TASK 3 (search
+widgets) merged to main and deployed; FAQ/support page built; confirmation screen localised;
+go-live checklist written. Site is DEPLOYED and ready but still in Duffel/Stripe TEST mode.
+
+## Done — 2026-07-24, Claude Code go-live + FAQ session
+
+- **Shipped the revenue + search work to `main` (deployed to production, test mode).** Cherry-picked
+  onto `main`, excluding the design commit per Liam's call:
+  - **TASK 1 — hold fee is live** ($14.99 standard / $19.99 return, USD). Document (PDF/email) is
+    gated behind a Stripe `hold_fee` payment; the confirm-to-fly fare path is unchanged and never
+    conflated with it. Verified end-to-end in test mode.
+  - **TASK 3 — search-form widgets**: airport/city type-ahead (Duffel Places API), calendar picker,
+    Adults/Children/Infants stepper, plus the multi-passenger completion (hold + PDF now handle
+    several travellers). Verified against live Duffel test mode.
+  - Both deploys confirmed live on `peregrin-demo.vercel.app` (`/api/pricing`, `/faq` return 200).
+- **TASK 2 (design) deliberately kept OFF `main`.** It's on-brand *interpretations* only — the four
+  real Claude Design export files never landed on disk. Still on branch `claude/pricing-and-design-v1`
+  (commits `eca9925` design + `4ce0feb` NOTES), to be reconciled against the real exports later so
+  the work isn't done twice. **The regenerated Claude Design exports are the blocker for TASK 2.**
+- **Help/FAQ + support page built and deployed** (`/faq`, linked from header + footer). How-it-works,
+  three trust pillars, 13 FAQs from the approved `automation/FAQ_AND_TRUST_COPY_2026-07-24.md`, plus a
+  sitewide footer trust bar + "held reservation, not a ticket" disclosure. Support contact is
+  **hello@peregrin.travel with an honest "we'll get back to you quickly" — no 24/7 / no response-time
+  SLA**. Accommodation FAQ intentionally omitted until Duffel Stays is approved. All 4 languages.
+- **Closed the English-only "Ticketed" heading gap (`NOTES-FOR-LIAM.md` §3)** — the confirmation
+  screen (ticketed heading/sub, countdown states, verify-status box) is now localised across en/es/ru/hi.
+- **`site/GO-LIVE-CHECKLIST.md` written** — captures the deferred pre-launch items: live Stripe + Duffel
+  keys and webhook, durable hold-fee entitlement store (in-memory today, not durable on serverless),
+  self-hosting the fonts, support/refund ops, and the abandoned-hold Duffel cost.
+- **Decisions locked in by Liam this pass** (recorded, not re-litigated): keep the hold fee in USD
+  (USD-fee / AUD-fare mix is intended); keep hold-created-before-payment; defer durable entitlement
+  storage and self-hosting fonts (both in the checklist).
+- `npm test` green (21 tests) before every push. Nothing merged from TASK 2; `main` fast-forwarded
+  `6c53efb → df80eee`.
+
+## Done — 2026-07-24, Cowork Project-setup + repo-review session
+
+- **Connected the local repo folder to Cowork** (`/Users/liamconroy/Projects/peregrine-travel`) and
+  reviewed the live build directly. Confirmed in `site/server.js` that the **business-critical
+  hold-fee fix is implemented**: `/api/order/:id/hold-checkout` charges the flat hold fee
+  (`HOLD_FEE_STANDARD` $14.99 / `HOLD_FEE_MULTI` $19.99, USD) via Stripe with `purpose: "hold_fee"`,
+  and the webhook calls `markHoldFeePaid()` to release the document **without paying the airline** —
+  exactly the intended "sell the reservation, not the ticket" model. Search already filters to
+  holdable fares. So the revenue mechanism is correct in code; the only gate to real money is
+  Duffel go-live + Stripe activation.
+- **Set up the "Peregrin Travel" Cowork Project.** Pasted custom **Instructions** (growth/BD partner,
+  B2C-first, legal-framed voice, one-decision-at-a-time). Created a concise business-brief scaffold
+  at `claude/peregrin-business-brief.md` in the Project. **Loaded 8 canonical docs into the Project
+  knowledge/Context** (CLAUDE.md, STATE.md, BUSINESS_PLAN, MARKETING_PLAN, BRAND, BD_PIPELINE,
+  REVENUE_AND_EXPANSION_RESEARCH, ROADMAP_PROPOSAL) so every Project chat is grounded. NOTE: the
+  Project copies are point-in-time snapshots — this on-disk STATE.md remains the source of truth.
+- **Drafted FAQ + trust copy** (`claude/peregrin/FAQ_AND_TRUST_COPY_DRAFT.md` in the Project; also
+  delivered to Liam). Draft-and-hold, grounded in the real product + `BRAND.md` voice + `BUSINESS_PLAN.md`
+  §5 legal posture (never "fake"; no guarantee of acceptance). **Two decisions flagged for Liam**:
+  (a) exact refund/guarantee terms, (b) whether to commit to a specific delivery-time claim. Ready
+  for Claude Code to integrate into `site/public/index.html` (all 4 languages; good time to close the
+  English-only "Ticketed" heading gap from `NOTES-FOR-LIAM.md` §3) once wording is approved.
+- **Automation investigation written** (`claude/peregrin/AUTOMATION_INVESTIGATION.md`; delivered).
+  Reprioritised `ROADMAP_PROPOSAL.md` for Liam's B2C/SEO-first call, expanded to ~20 automations
+  across ops/growth/lifecycle/BD/back-office, mapped to real connector availability (Drive live;
+  Gmail/Calendar/Notion installed-but-not-enabled-in-chat; no native Stripe/GSC/social). Recommended
+  a "turn on this week" set of 5 (go-live watch, competitor watch, SEO drafting, community sweep,
+  STATE.md discipline) — none created yet, awaiting Liam's greenlight.
+
+**Strategy note (important):** Liam has **explicitly chosen B2C + SEO + high-trust first** for
+fastest revenue, with B2B/API partnerships as an alongside/phase-2 track. This **reverses the
+B2B-wedge-first ordering** in BUSINESS_PLAN §2 / MARKETING_PLAN §1 — treat Liam's call as current.
+Also: **account-level Memory is stale** — still says "B2B wedge first / avoid retail SEO" and "based
+in Bangkok"; Liam is moving to Australia soon. Both lines should be updated in Memory.
+
+## Done — 2026-07-24, later session
+
+- **Claude Design produced 4 layout specs** (homepage x2 directions, booking-flow trust
+  treatments, public Verify page, programmatic SEO template) — reviewed in full. Strong,
+  closely follows `automation/CLAUDE_DESIGN_BRIEF_2026-07-24.md`. Three decisions made: ship
+  homepage direction 1a (tool stays hero), adopt Source Serif 4 + Public Sans typeface (free/OFL),
+  no stock photography.
+- **Found a business-critical gap while reviewing the design**: the live site currently charges
+  nothing for a reservation hold — only the separate "confirm and actually fly" step has a Stripe
+  charge. Since most customers never convert to a real ticket, this means the site currently
+  cannot earn from its primary intended product. Not a design flaw — Claude Design's mockup
+  accurately mirrored the real (fee-less) code.
+- **Pricing corrected**: standard hold raised from $9.99–12 to **$14.99**, return from $14–18 to
+  **$19.99** — positioned just under `onwardticket.com`'s $16 (the category's actual trust
+  leader), rather than underpricing it. Full reasoning in `docs/BUSINESS_PLAN.md` §3 and §9,
+  including the corrected Stripe international-card cost basis.
+- **New Claude Code handoff written**: `automation/CLAUDE_CODE_HANDOFF_2026-07-24_PRICING_AND_DESIGN.md`
+  — three tasks: (1) hold-payment fix, business-critical, do first; (2) full Claude Design
+  integration (homepage, trust treatments, SEO template, typeface); (3) search-form UX gaps Liam
+  found by comparing directly against onwardticket.com's order form — airport/city autocomplete
+  with flags (via Duffel's Places Suggestion API, not a new dataset), a real calendar date picker,
+  and an Adults/Children/Infants passenger stepper. Also flagged (not built): a support/FAQ page
+  is worth adding, but don't copy onwardticket's "24/7, 30-min response" claim without Liam
+  actually staffing it. Branch + Liam-review pattern, same as the morning safety pass, but this
+  one is explicitly meant to change customer-visible pricing/behavior. Not yet run.
+
+## Done — 2026-07-24, earlier session
 Duffel/Wise/Stripe KYC in progress + overnight research handoff).
 
 ## Done — 2026-07-24 session
@@ -85,6 +181,17 @@ Duffel/Wise/Stripe KYC in progress + overnight research handoff).
 
 ## Next
 
+From the 2026-07-24 Cowork session (do these first):
+- **Confirm Duffel go-live + Stripe activation status** — Stripe KYC passport run in progress; this
+  is the one gate to real revenue.
+- **Make the two FAQ decisions** (refund/guarantee terms; delivery-time claim), then hand the
+  approved FAQ/trust copy to Claude Code to integrate into `site/public/index.html` (all 4 languages).
+- **Greenlight the "turn on this week" automation set** + pick a day/time; paste the life-automation
+  chat to merge into `AUTOMATION_INVESTIGATION.md`; optionally enable the Gmail connector in-chat for
+  lifecycle-email automations.
+- **Update account-level Memory**: B2C/SEO-first strategy (not B2B-wedge-first), and Australia (not
+  Bangkok).
+
 1. **Run the Claude Code safety-pass session** (`automation/CLAUDE_CODE_HANDOFF_2026-07-24.md`) —
    adds test coverage for the bug class that shipped tonight, branch-only, ready to paste in.
 2. **Review `docs/reference/REVENUE_AND_EXPANSION_RESEARCH.md`** and decide which feature(s),
@@ -106,7 +213,11 @@ the production bug fix, domain connection, SEO baseline, and KYC/research above.
 
 - Duffel go-live (production API keys) — KYC in progress via Stripe Connect tonight, not yet
   confirmed approved. No fallback supply path if rejected.
-- Duffel Stays access — separate request submitted, accommodation flow blocked on it.
+- Duffel Stays access — separate request submitted, accommodation flow blocked on it (also why the
+  accommodation FAQ is kept out of the live /faq page).
+- **TASK 2 design integration** is blocked on the **regenerated Claude Design export files** — the
+  four `.dc.html` specs + `RATIONALE.md` never landed on disk, so the design work stays on branch
+  `claude/pricing-and-design-v1` as on-brand interpretations until the real exports exist.
 - Stripe account activation in progress tonight (reached statement-descriptor step) — not yet
   confirmed fully live/able to take real charges.
 - **The site cannot take real payment or issue real tickets yet even though it looks

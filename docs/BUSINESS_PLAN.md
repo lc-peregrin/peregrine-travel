@@ -20,12 +20,31 @@ The honest strategic read: this is a "margin machine constrained not by demand o
 
 | Tier | Mechanic | Est. cost to Peregrin | Suggested price | Est. margin |
 |---|---|---|---|---|
-| Reservation Hold (standard) | Duffel hold order, real PNR, lapses automatically if unpaid | ~$3 (Duffel order fee) + ~3% payment processing ≈ $3.30 | $9.99–12 | ~65–70% |
+| Reservation Hold (standard) | Duffel hold order, real PNR, lapses automatically if unpaid | ~$3 (Duffel order fee) + international-card Stripe fee (~3.25–3.5% + A$0.30 + GST, see §9) ≈ $3.60–3.80 | **$14.99** (updated 2026-07-24, was $9.99–12) | ~75% |
 | Confirmed Ticket (premium) | Real ticketed booking, refunded/cancelled within the fare's own window | Fare cost (temporary cash float) + 1% Managed Content fee + refund friction | $39–49 | Thin, capital-intensive — priced to match this tier's competitors |
-| Return / multi-city | Same mechanic, more segments | ~$5–6 (2x order fee) | $14–18 | Similar % margin to standard |
+| Return / multi-city | Same mechanic, more segments | ~$6–6.50 (2x order fee + processing) | **$19.99** (updated 2026-07-24, was $14–18) | ~68% |
 | Accommodation proof add-on | Real, freely-cancellable property booking (Duffel Stays, pending access) | Cost of the booking minus refund | $10–15 markup | Thin but near-zero marginal effort |
 
-Near-zero-incremental-cost add-ons already scoped: travel insurance referral (SafetyWing ~10% of premium, World Nomads via CJ), visa document referral (iVisa ~20% commission), eSIM/connectivity affiliate (Airalo-style). At $9.99 retail and ~$3.30 cost, each standard reservation clears roughly $6.70 before payment processing and marketing — competitive with the low end of the market and better-margin than several competitors.
+**Pricing decision, 2026-07-24.** Competitor check against the actual market leader confirmed the
+standard-hold price was underpriced relative to the trust position Peregrin is actually claiming.
+`onwardticket.com` — the established category leader (170K monthly visits, the trust benchmark the
+whole positioning strategy in `MARKETING_PLAN.md` §1 is built around) — charges **$16 flat**.
+Sub-$10 competitors exist (onwardticket.us from $7, onwardtickets.com at $6.99) but are the
+low-trust, shorter-validity end of the market, not the segment Peregrin is flanking. Since
+Peregrin's actual differentiator is a genuinely stronger trust mechanic than the leader's own
+(a live, publicly checkable verify page against the real airline record, not just a claim), pricing
+below the leader was leaving margin on the table without buying any real competitive advantage —
+undercutting a trust leader on price reads as *lower* quality in this specific anxiety-driven
+category, not better value. New price: **$14.99** standard / **$19.99** return — just under the
+leader (keeps the "flank, don't clone" positioning from `MARKETING_PLAN.md`) while meaningfully
+improving margin over the old $9.99–12 range. This also depends on §9's corrected cost basis
+(international-card Stripe rate, not domestic).
+
+Near-zero-incremental-cost add-ons already scoped: travel insurance referral (SafetyWing ~10% of
+premium, World Nomads via CJ), visa document referral (iVisa ~20% commission), eSIM/connectivity
+affiliate (Airalo-style). At $14.99 retail and ~$3.70 cost, each standard reservation clears
+roughly $11.30 before marketing — a real improvement on the previous margin and still positioned
+just under the category leader's own price.
 
 ## 4. How a booking actually works (operations)
 
@@ -72,3 +91,42 @@ Based on the original market sizing work, a credible path to launch realisticall
 4. **Legal/reputational grey zone** — not clearly illegal anywhere major on the current disclosed-reservation model, but genuinely jurisdiction-dependent; a paid legal consult before scaling into new markets is the standing recommendation from the compliance review, not yet done.
 5. **B2B sales cycle length** — agency and partner sales, even when receptive, move slower than a self-serve checkout; the go-to-market plan should not assume fast conversion.
 6. **SEO/AI-search dependence for the retail channel** — deprioritised in favour of B2B for now, which is itself a mitigation, but worth being aware AI answer engines are increasingly intercepting "do I need an onward ticket"-style queries, shortening the runway on that channel if it's revisited later.
+
+## 9. Pricing & fee-display compliance (added 2026-07-24)
+
+Real-cost and regulatory research, done to make sure the displayed price is both accurate against
+actual API costs and compliant with fee-disclosure rules in the jurisdictions Peregrin actually
+touches.
+
+**Updated cost basis.** Duffel's real published pricing: $3 per order (applies at order creation,
+including a hold order — not only once ticketed) + 1% of order value (Managed Content) + $1 per
+paid ancillary + 2% FX if a currency conversion is needed. Stripe's Australian-account rates: 1.75%
++ A$0.30 domestic card, but **3.25–3.5% + A$0.30 for international cards** (plus 10% GST on the fee
+itself), and a further 1–2% if the charge currency differs from the settlement currency. Since
+Peregrin's actual customers are near-universally paying with non-Australian cards, the realistic
+processing cost is the international rate, not domestic — meaningfully higher than the flat "~3%"
+figure used in the §3 unit-economics table. Worth re-running that table with the international rate
+before finalising retail pricing; the current $9.99–12 price point likely still clears a healthy
+margin, but the actual number is probably closer to ~55–65% than ~65–70%.
+
+**Fee-display legal posture.** The FTC's "Unfair or Deceptive Fees" rule (effective May 2025, US)
+bans drip pricing and requires all mandatory fees shown upfront, more prominently than any other
+price — but its current scope is specifically **live-event ticketing and short-term lodging**, not
+flight bookings. That matters directly for Peregrin: the flight-reservation product isn't currently
+in scope, but the **accommodation-proof (Duffel Stays) product plausibly is**, once it launches —
+worth a specific compliance check at that point rather than assuming the same posture covers both
+product lines. Separately, credit-card surcharging (passing Stripe's processing fee to the customer
+as a line item) is banned outright under the EU's PSD2 for any EU customer, and **Australia is
+banning it entirely from 1 October 2026** — given Peregrin is an Australian-registered business
+selling to a global, partly-European customer base, surcharging is not a viable fee-display pattern
+in either of its two most directly relevant jurisdictions, regardless of what's allowed in specific
+US states.
+
+**Practical conclusion.** Don't itemise or surcharge — bake all real costs (Duffel + Stripe,
+including the higher international-card rate) into one flat, all-in retail price, exactly as
+`onwardticket.com` and `dummyticket24.com` already do in this category (both advertise a single
+flat number, no checkout-time additions). This is simultaneously the best-converting pattern
+(per `docs/reference/REVENUE_AND_EXPANSION_RESEARCH.md` §2 — hidden/surprise fees are one of the
+single biggest documented abandonment triggers) and the only pattern that's cleanly compliant
+across every jurisdiction Peregrin actually operates in, rather than needing separate logic per
+region.
